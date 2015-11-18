@@ -1,0 +1,5 @@
+
+# Installing The component will remove existing database tables, Watch com_reoo/admin/sql/install.
+
+# Un-Installing The component will remove existing database tables, Watch com_reoo/admin/sql/uninstall.
+
