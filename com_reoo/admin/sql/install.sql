@@ -1,6 +1,4 @@
---
--- Table structure for table `#__sscategories`
---
+
 DROP TABLE IF EXISTS `br1fp_sscategories`;
 CREATE TABLE IF NOT EXISTS `br1fp_sscategories` (
   `ID` bigint(20) NOT NULL,
@@ -11,11 +9,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_sscategories` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__sscategoriestemp`
---
 DROP TABLE IF EXISTS `br1fp_sscategoriestemp`;
 CREATE TABLE IF NOT EXISTS `br1fp_sscategoriestemp` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
@@ -24,11 +18,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_sscategoriestemp` (
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__sscities`
---
 DROP TABLE IF EXISTS `br1fp_sscities`;
 CREATE TABLE IF NOT EXISTS `br1fp_sscities` (
   `ID` bigint(20) NOT NULL,
@@ -41,11 +31,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_sscities` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__sscitiestemp`
---
 DROP TABLE IF EXISTS `br1fp_sscitiestemp`;
 CREATE TABLE IF NOT EXISTS `br1fp_sscitiestemp` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
@@ -55,11 +41,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_sscitiestemp` (
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__sscompanies`
---
 
 DROP TABLE IF EXISTS `br1fp_sscompanies`;
 CREATE TABLE IF NOT EXISTS `br1fp_sscompanies` (
@@ -68,20 +50,13 @@ CREATE TABLE IF NOT EXISTS `br1fp_sscompanies` (
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
---
--- Dumping data for table `brg_sscompanies`
---
+
 
 INSERT INTO `br1fp_sscompanies` (`ID`, `Name`) VALUES
 (1, 'Bridge'),
 (2, 'Personal'),
 (3, 'Website');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `#__ssconstructionphasedetails`
---
 DROP TABLE IF EXISTS `br1fp_ssconstructionphasedetails`;
 CREATE TABLE IF NOT EXISTS `br1fp_ssconstructionphasedetails` (
   `ID` bigint(20) NOT NULL,
@@ -93,11 +68,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_ssconstructionphasedetails` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__ssconstructionphases`
---
 DROP TABLE IF EXISTS `br1fp_ssconstructionphases`;
 CREATE TABLE IF NOT EXISTS `br1fp_ssconstructionphases` (
   `ID` bigint(20) NOT NULL,
@@ -108,11 +79,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_ssconstructionphases` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__sscontracts`
---
 DROP TABLE IF NOT EXISTS `br1fp_sscontracts`;
 CREATE TABLE IF NOT EXISTS `br1fp_sscontracts` (
   `ID` bigint(20) NOT NULL,
@@ -124,11 +91,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_sscontracts` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__sscustomers`
---
 DROP TABLE IF EXISTS `br1fp_sscustomers`;
 CREATE TABLE IF NOT EXISTS `br1fp_sscustomers` (
   `ID` bigint(20) NOT NULL,
@@ -140,11 +103,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_sscustomers` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__ssfinishinglevels`
---
 DROP TABLE IF EXISTS `br1fp_ssfinishinglevels`;
 CREATE TABLE IF NOT EXISTS `br1fp_ssfinishinglevels` (
   `ID` bigint(20) NOT NULL,
@@ -155,11 +114,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_ssfinishinglevels` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__ssfloors`
---
 DROP TABLE IF EXISTS `br1fp_ssfloors`;
 CREATE TABLE IF NOT EXISTS `br1fp_ssfloors` (
   `ID` bigint(20) NOT NULL,
@@ -170,11 +125,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_ssfloors` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__ssfloorstemp`
---
 DROP TABLE IF EXISTS `br1fp_ssfloorstemp`;
 CREATE TABLE IF NOT EXISTS `br1fp_ssfloorstemp` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
@@ -183,11 +134,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_ssfloorstemp` (
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__ssinstallments`
---
 DROP TABLE IF EXISTS `br1fp_ssinstallments`;
 CREATE TABLE IF NOT EXISTS `br1fp_ssinstallments` (
   `ID` bigint(20) NOT NULL,
@@ -201,11 +148,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_ssinstallments` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__ssmodificationdetails`
---
 DROP TABLE IF EXISTS `br1fp_ssmodificationdetails`;
 CREATE TABLE IF NOT EXISTS `br1fp_ssmodificationdetails` (
   `ID` bigint(20) NOT NULL,
@@ -218,11 +161,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_ssmodificationdetails` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__ssmodificationrequest`
---
 DROP TABLE IF EXISTS `br1fp_ssmodificationrequest`;
 CREATE TABLE IF NOT EXISTS `br1fp_ssmodificationrequest` (
   `ID` bigint(20) NOT NULL,
@@ -234,11 +173,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_ssmodificationrequest` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__ssmodificationstatus`
---
 DROP TABLE IF EXISTS `br1fp_ssmodificationstatus`;
 CREATE TABLE IF NOT EXISTS `br1fp_ssmodificationstatus` (
   `ID` bigint(20) NOT NULL,
@@ -249,11 +184,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_ssmodificationstatus` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__sspayments`
---
 DROP TABLE IF EXISTS `br1fp_sspayments`;
 CREATE TABLE IF NOT EXISTS `br1fp_sspayments` (
   `ID` bigint(20) NOT NULL,
@@ -272,11 +203,6 @@ CREATE TABLE IF NOT EXISTS `br1fp_sspayments` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `#__sspimages`
---
 DROP TABLE IF EXISTS `br1fp_sspimages`;
 CREATE TABLE IF NOT EXISTS `br1fp_sspimages` (
   `ID` bigint(20) NOT NULL,
@@ -285,11 +211,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_sspimages` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__ssprojects`
---
 DROP TABLE IF EXISTS `br1fp_ssprojects`;
 CREATE TABLE IF NOT EXISTS `br1fp_ssprojects` (
   `ID` bigint(20) NOT NULL,
@@ -308,11 +230,6 @@ CREATE TABLE IF NOT EXISTS `br1fp_ssprojects` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `#__ssprovinces`
---
 DROP TABLE IF EXISTS `br1fp_ssprovinces`;
 CREATE TABLE IF NOT EXISTS `br1fp_ssprovinces` (
   `ID` bigint(20) NOT NULL,
@@ -323,11 +240,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_ssprovinces` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__ssprovincestemp`
---
 DROP TABLE IF EXISTS `br1fp_ssprovincestemp`;
 CREATE TABLE IF NOT EXISTS `br1fp_ssprovincestemp` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
@@ -336,11 +249,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_ssprovincestemp` (
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__ssregions`
---
 DROP TABLE IF EXISTS `br1fp_ssregions`;
 CREATE TABLE IF NOT EXISTS `br1fp_ssregions` (
   `ID` bigint(20) NOT NULL,
@@ -353,11 +262,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_ssregions` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__ssregionstemp`
---
 DROP TABLE IF EXISTS `br1fp_ssregionstemp`;
 CREATE TABLE IF NOT EXISTS `br1fp_ssregionstemp` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
@@ -367,11 +272,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_ssregionstemp` (
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__ssreservationstatus`
---
 DROP TABLE IF EXISTS `br1fp_ssreservationstatus`;
 CREATE TABLE IF NOT EXISTS `br1fp_ssreservationstatus` (
   `ID` bigint(20) NOT NULL,
@@ -383,11 +284,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_ssreservationstatus` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__sssubcategories`
---
 DROP TABLE IF EXISTS `br1fp_sssubcategories`;
 CREATE TABLE IF NOT EXISTS `br1fp_sssubcategories` (
   `ID` bigint(20) NOT NULL,
@@ -399,11 +296,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_sssubcategories` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__sstemp`
---
 DROP TABLE IF EXISTS `br1fp_sstemp`;
 CREATE TABLE IF NOT EXISTS `br1fp_sstemp` (
   `ID` int(11) NOT NULL,
@@ -411,11 +304,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_sstemp` (
   KEY `ID_2` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `#__ssunits`
---
 DROP TABLE IF EXISTS `br1fp_ssunits`;
 CREATE TABLE IF NOT EXISTS `br1fp_ssunits` (
   `ID` bigint(20) NOT NULL,
