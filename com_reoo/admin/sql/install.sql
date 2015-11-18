@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `br1fp_ssconstructionphases` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF NOT EXISTS `br1fp_sscontracts`;
+DROP TABLE IF EXISTS `br1fp_sscontracts`;
 CREATE TABLE IF NOT EXISTS `br1fp_sscontracts` (
   `ID` bigint(20) NOT NULL,
   `CustomerID` bigint(20) NOT NULL,
