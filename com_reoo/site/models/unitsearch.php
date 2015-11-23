@@ -19,7 +19,7 @@ jimport('joomla.application.component.model');
  * @package    unitsearch
  * @subpackage Models
  */
-class unitsearchsModelunitsearch extends JModelLegacy {
+class reooModelunitsearch extends JModelLegacy {
 
     /**
      * Constructor that retrieves the ID from the request

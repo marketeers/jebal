@@ -19,7 +19,7 @@ jimport( 'joomla.application.component.model' );
  * @package    unitsearch
  * @subpackage Models
  */
-class unitsearchsModelunitdetails extends JModelLegacy
+class reooModelunitdetails extends JModelLegacy
 {
     function  __construct() {
         parent::__construct();

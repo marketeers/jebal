@@ -19,7 +19,7 @@ jimport('joomla.application.component.controller');
  * @package    unitsearch
  * @subpackage Controllers
  */
-class unitsearchsController extends JControllerLegacy
+class reooController extends JControllerLegacy
 {
 	/**
 	 * Method to display the view

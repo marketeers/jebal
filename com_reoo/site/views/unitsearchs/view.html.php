@@ -20,7 +20,7 @@ jimport( 'joomla.application.component.view');
  * @subpackage Views
  */
 
-class unitsearchsViewunitsearchs extends JViewLegacy
+class reooViewunitsearchs extends JViewLegacy
 {
     /**
      * unitsearchs view display method

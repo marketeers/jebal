@@ -20,7 +20,7 @@ jimport( 'joomla.application.component.view');
  * @subpackage Views
  */
 
-class customersViewpayments extends JViewLegacy
+class reooViewpayments extends JViewLegacy
 {
     /**
      * customers view display method

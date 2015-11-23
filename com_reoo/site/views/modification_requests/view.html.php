@@ -20,7 +20,7 @@ jimport( 'joomla.application.component.view');
  * @subpackage Views
  */
 
-class customersViewmodification_requests extends JViewLegacy
+class reooViewmodification_requests extends JViewLegacy
 {
     /**
      * customers view display method

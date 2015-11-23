@@ -19,7 +19,7 @@ jimport( 'joomla.application.component.model' );
  * @package    customers
  * @subpackage Models
  */
-class customersModelpayments extends JModelLegacy
+class reooModelpayments extends JModelLegacy
 {
 	/**
 	 * Gets the greetings
