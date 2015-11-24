@@ -56,103 +56,103 @@ class reooModelunitsearch extends JModelLegacy {
 
         if ($provineID != null) {
             $text = " ";
-            $query = "SELECT ID FROM #__ssprovinces WHERE TempID=" . $provineID;
+            $query = "SELECT ID FROM cstm_ssprovinces WHERE TempID=" . $provineID;
             $data = $this->_getList($query);
 
             if (count($data) > 1) {
                 $text .=" ( ";
                 for ($i = 0; $i < count($data); $i++) {
-                    $text .= "#__sscities.ProvinceID=" . $data[$i]->ID ;
+                    $text .= "cstm_sscities.ProvinceID=" . $data[$i]->ID ;
                     if ($i != (count($data) - 1))
                         $text .= " OR ";
                 }
                 $text .=" ) ";
                 $whereArr[] = $text;
             }elseif (!empty($data[0]->ID)) {
-                $whereArr[] = "#__sscities.ProvinceID=" . $data[0]->ID ;
+                $whereArr[] = "cstm_sscities.ProvinceID=" . $data[0]->ID ;
             }
         }
 
         if ($cityID != null) {
             $text = " ";
-            $query = "SELECT ID FROM #__sscities WHERE TempID=" . $cityID;
+            $query = "SELECT ID FROM cstm_sscities WHERE TempID=" . $cityID;
             $data = $this->_getList($query);
             //die($query);
             if (count($data) > 1) {
                 $text .=" ( ";
                 for ($i = 0; $i < count($data); $i++) {
-                    $text .= "#__ssregions.CityID=" . $data[$i]->ID ;
+                    $text .= "cstm_ssregions.CityID=" . $data[$i]->ID ;
                     if ($i != (count($data) - 1))
                         $text .= " OR ";
                 }
                 $text .=" ) ";
                 $whereArr[] = $text;
             }elseif(!empty ($data[0]->ID))
-                $whereArr[] = "#__ssregions.CityID=" . $data[0]->ID ; //$cityID;
+                $whereArr[] = "cstm_ssregions.CityID=" . $data[0]->ID ; //$cityID;
         }
 
         if ($regionID != null) {
             $text = " ";
-            $query = "SELECT ID FROM #__ssregions WHERE TempID=" . $regionID;
+            $query = "SELECT ID FROM cstm_ssregions WHERE TempID=" . $regionID;
             $data = $this->_getList($query);
 
             if (count($data) > 1) {
                 $text .=" ( ";
                 for ($i = 0; $i < count($data); $i++) {
-                    $text .= "#__ssprojects.RegionID=" . $data[$i]->ID ;
+                    $text .= "cstm_ssprojects.RegionID=" . $data[$i]->ID ;
                     if ($i != (count($data) - 1))
                         $text .= " OR ";
                 }
                 $text .=" ) ";
                 $whereArr[] = $text;
             }elseif(!empty ($data[0]->ID))
-                $whereArr[] = "#__ssprojects.RegionID=" . $data[0]->ID ; //$regionID;
+                $whereArr[] = "cstm_ssprojects.RegionID=" . $data[0]->ID ; //$regionID;
         }
 
         if ($categoryID != null) {
             $text = " ";
-            $query = "SELECT ID FROM #__sscategories WHERE TempID=" . $categoryID;
+            $query = "SELECT ID FROM cstm_sscategories WHERE TempID=" . $categoryID;
             $data = $this->_getList($query);
 
             if (count($data) > 1) {
                 $text .=" ( ";
                 for ($i = 0; $i < count($data); $i++) {
-                    $text .= "#__ssunits.CategoryID=" . $data[$i]->ID ;
+                    $text .= "cstm_ssunits.CategoryID=" . $data[$i]->ID ;
                     if ($i != (count($data) - 1))
                         $text .= " OR ";
                 }
                 $text .=" ) ";
                 $whereArr[] = $text;
             }elseif(!empty ($data[0]->ID))
-                $whereArr[] = "#__ssunits.CategoryID=" . $data[0]->ID; //$categoryID;
+                $whereArr[] = "cstm_ssunits.CategoryID=" . $data[0]->ID; //$categoryID;
         }
 
         if ($floorID != null) {
             $text = " ";
-            $query = "SELECT ID FROM #__ssfloors WHERE TempID=" . $floorID;
+            $query = "SELECT ID FROM cstm_ssfloors WHERE TempID=" . $floorID;
             $data = $this->_getList($query);
 
             if (count($data) > 1) {
                 $text .="( ";
                 for ($i = 0; $i < count($data); $i++) {
-                    $text .= " #__ssunits.FloorID=" . $data[$i]->ID ;
+                    $text .= " cstm_ssunits.FloorID=" . $data[$i]->ID ;
                     if ($i != (count($data) - 1))
                         $text .= " OR ";
                 }
                 $text .=" ) ";
                 $whereArr[] = $text;
             }elseif(!empty ($data[0]->ID))
-                $whereArr[] = "#__ssunits.FloorID=" . $data[0]->ID ; //$floorID;
+                $whereArr[] = "cstm_ssunits.FloorID=" . $data[0]->ID ; //$floorID;
         }
 
         if ($priceFrom != null)
-            $whereArr[] = "#__ssunits.TotalValue >=" . $priceFrom;
+            $whereArr[] = "cstm_ssunits.TotalValue >=" . $priceFrom;
         if ($priceTo != null)
-            $whereArr[] = "#__ssunits.TotalValue <=" . $priceTo;
+            $whereArr[] = "cstm_ssunits.TotalValue <=" . $priceTo;
         if ($areaFrom != null)
-            $whereArr[] = "#__ssunits.Area >=" . $areaFrom;
+            $whereArr[] = "cstm_ssunits.Area >=" . $areaFrom;
         if ($areaTo != null)
-            $whereArr[] = "#__ssunits.Area <=" . $areaTo;
+            $whereArr[] = "cstm_ssunits.Area <=" . $areaTo;
 
         if (count($whereArr) > 0) {
             $whereClause = " where " . implode(" and ", $whereArr);
@@ -184,16 +184,16 @@ class reooModelunitsearch extends JModelLegacy {
         if (!empty($this->_data)) {
             $whereClause = $this->_data;
         } else {
-            $whereClause = "WHERE #__sscities.ProvinceID='0'";
+            $whereClause = "WHERE cstm_sscities.ProvinceID='0'";
         }
         //die($whereClause);
-        $query = "SELECT #__ssunits.ID ,#__ssunits.PlotNumber, #__ssunits.Area, #__ssunits.TotalValue,
-                 if(#__ssprojects.Name" . $this->_ext . "<>'',#__ssprojects.Name" . $this->_ext . ",#__ssprojects.Name) as Name,
-                 if(#__ssregions.Name" . $this->_ext . "<>'',#__ssregions.Name" . $this->_ext . ",#__ssregions.Name) as rname,
-                 if(#__sscities.Name" . $this->_ext . "<>'',#__sscities.Name" . $this->_ext . ",#__sscities.Name) as cname"
-                . " FROM #__ssunits inner join #__ssprojects on #__ssunits.ProjectID = #__ssprojects.ID and (#__ssunits.ReservationStatusID LIKE '%000000001') "
-                . "inner join #__ssregions on #__ssregions.ID = #__ssprojects.RegionID  "
-                . "inner join #__sscities on #__sscities.ID = #__ssregions.CityID  "
+        $query = "SELECT cstm_ssunits.ID ,cstm_ssunits.PlotNumber, cstm_ssunits.Area, cstm_ssunits.TotalValue,
+                 if(cstm_ssprojects.Name" . $this->_ext . "<>'',cstm_ssprojects.Name" . $this->_ext . ",cstm_ssprojects.Name) as Name,
+                 if(cstm_ssregions.Name" . $this->_ext . "<>'',cstm_ssregions.Name" . $this->_ext . ",cstm_ssregions.Name) as rname,
+                 if(cstm_sscities.Name" . $this->_ext . "<>'',cstm_sscities.Name" . $this->_ext . ",cstm_sscities.Name) as cname"
+                . " FROM cstm_ssunits inner join cstm_ssprojects on cstm_ssunits.ProjectID = cstm_ssprojects.ID and (cstm_ssunits.ReservationStatusID LIKE '%000000001') "
+                . "inner join cstm_ssregions on cstm_ssregions.ID = cstm_ssprojects.RegionID  "
+                . "inner join cstm_sscities on cstm_sscities.ID = cstm_ssregions.CityID  "
                 . $whereClause;
 
         //die($query);

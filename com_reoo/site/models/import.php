@@ -160,7 +160,7 @@ class importModelimport extends JModelLegacy
         $db = $this->_db;
         $db->BeginTrans();
 
-        $tablename = "#__ss".strtolower(substr($file, 0, -4));
+        $tablename = "cstm_ss".strtolower(substr($file, 0, -4));
         $delQ = "delete from $tablename where ID < 500000";
 
         $db->setQuery($delQ);
@@ -234,7 +234,7 @@ class importModelimport extends JModelLegacy
             }
 
             //insert customer
-            $tablename = "#__sscustomers";
+            $tablename = "cstm_sscustomers";
             $Q = "insert into $tablename(".implode(",", $headersArr).")
                       VALUES ('".implode("','", $rowArr)."')
                     ON DUPLICATE KEY UPDATE Name = VALUES(Name),NameInArabic = VALUES(NameInArabic),Email=VALUES(Email)";
@@ -252,7 +252,7 @@ class importModelimport extends JModelLegacy
                 //add users and permissions
                 //
                 //users
-                $tablename = "#__users";
+                $tablename = "cstm_users";
                 $Q = "insert  into $tablename(username,name,email,password,gid,usertype)
                       VALUES (concat(SUBSTRING_INDEX('".$rowArr["Name"]."', ' ', 1),".$rowArr[ID]."+123),'".$rowArr["Name"]."','".$rowArr["Email"]."','".JUserHelper::getCryptedPassword('123456',$salt).':'.$salt."',18,'Registered')";
 
@@ -267,7 +267,7 @@ class importModelimport extends JModelLegacy
 
 
                 //update customer table set userid field to new inserted user id in users table
-                $updateQ = "update #__sscustomers set userid = LAST_INSERT_ID() where ID = " . $rowArr[ID];
+                $updateQ = "update cstm_sscustomers set userid = LAST_INSERT_ID() where ID = " . $rowArr[ID];
                 //die ($updateQ);
                 $db->setQuery($updateQ);
                 $db->query();
@@ -280,7 +280,7 @@ class importModelimport extends JModelLegacy
                 //$ids[] = mysql_insert_id();
 
                 //core_acl_aro
-                $tablename = "#__core_acl_aro";
+                $tablename = "cstm_core_acl_aro";
                 $Q = "insert  into $tablename(section_value,value,name)
                       VALUES ('users',LAST_INSERT_ID(),'".$rowArr["Name"]."')";
 
@@ -294,7 +294,7 @@ class importModelimport extends JModelLegacy
                 }
 
                 //_core_acl_groups_aro_map
-                $tablename = "#__core_acl_groups_aro_map";
+                $tablename = "cstm_core_acl_groups_aro_map";
                 $Q = "insert  into $tablename(group_id,aro_id)
                       VALUES (18,LAST_INSERT_ID())";
 
@@ -313,7 +313,7 @@ class importModelimport extends JModelLegacy
 
         /*if ($errorPos == -1)
         {
-            $Q = "update #__users set username= concat(SUBSTRING_INDEX(name, ' ', 1),id+123) where id in (".implode(",", $ids).")";
+            $Q = "update cstm_users set username= concat(SUBSTRING_INDEX(name, ' ', 1),id+123) where id in (".implode(",", $ids).")";
 
             //die($Q);
             $db->setQuery($Q);

@@ -36,13 +36,13 @@ class reooModelcustomerunits extends JModelLegacy
 		$db =& JFactory::getDBO();
 
 
-		$query = 'SELECT #__sscontracts.ID as CID,#__sscontracts.UnitID as ID,#__sscontracts.TotalValue, if(#__ssconstructionphases.Name'.$ext.'<>"",#__ssconstructionphases.Name'.$ext.',#__ssconstructionphases.Name) as ConstructionPhase,#__ssunits.PlotNumber,
-                    if(#__ssprojects.Name'.$ext.'<>"",#__ssprojects.Name'.$ext.',#__ssprojects.Name) as Name, "1" as paid, "1" as inst
-                    FROM #__sscustomers inner join #__sscontracts on #__sscustomers.ID = #__sscontracts.CustomerID
-                    LEFT join #__ssunits on #__ssunits.ID = #__sscontracts.UnitID
-                    LEFT join #__ssprojects on #__ssprojects.ID = #__ssunits.ProjectID
-                    LEFT join #__ssconstructionphases on #__ssconstructionphases.ID = #__ssunits.ConstructionPhaseID
-                    WHERE #__sscontracts.CustomerID=' . $customerID;
+		$query = 'SELECT cstm_sscontracts.ID as CID,cstm_sscontracts.UnitID as ID,cstm_sscontracts.TotalValue, if(cstm_ssconstructionphases.Name'.$ext.'<>"",cstm_ssconstructionphases.Name'.$ext.',cstm_ssconstructionphases.Name) as ConstructionPhase,cstm_ssunits.PlotNumber,
+                    if(cstm_ssprojects.Name'.$ext.'<>"",cstm_ssprojects.Name'.$ext.',cstm_ssprojects.Name) as Name, "1" as paid, "1" as inst
+                    FROM cstm_sscustomers inner join cstm_sscontracts on cstm_sscustomers.ID = cstm_sscontracts.CustomerID
+                    LEFT join cstm_ssunits on cstm_ssunits.ID = cstm_sscontracts.UnitID
+                    LEFT join cstm_ssprojects on cstm_ssprojects.ID = cstm_ssunits.ProjectID
+                    LEFT join cstm_ssconstructionphases on cstm_ssconstructionphases.ID = cstm_ssunits.ConstructionPhaseID
+                    WHERE cstm_sscontracts.CustomerID=' . $customerID;
         //die($query);
 		$db->setQuery( $query );
 		$customerUnits = $db->loadObjectList();
@@ -66,7 +66,7 @@ class reooModelcustomerunits extends JModelLegacy
         if ($joomlauserid ==0)  return -1;
         $db =& JFactory::getDBO();
 
-		$query = 'SELECT ID FROM #__sscustomers where userid='. $joomlauserid;
+		$query = 'SELECT ID FROM cstm_sscustomers where userid='. $joomlauserid;
         //die ($query);
 		$db->setQuery( $query );
 		$customerid = $db->loadResult();
@@ -97,21 +97,21 @@ class reooModelcustomerunits extends JModelLegacy
                 $db->setQuery('SET SQL_BIG_SELECTS=1');
                 $db->query();
 
-		$query = 'SELECT count(#__ssinstallments.ID)
-                  FROM #__ssinstallments left join #__sspayments on #__sspayments.installmentID = #__ssinstallments.ID
-                  where #__ssinstallments.ContractID='. $contractID . ' and #__sspayments.ID is NULL';
+		$query = 'SELECT count(cstm_ssinstallments.ID)
+                  FROM cstm_ssinstallments left join cstm_sspayments on cstm_sspayments.installmentID = cstm_ssinstallments.ID
+                  where cstm_ssinstallments.ContractID='. $contractID . ' and cstm_sspayments.ID is NULL';
 		$db->setQuery( $query );
 		$Installments1 = $db->loadResult();
 		//die($Installments1 );
 		
   		$db->setQuery('SET SQL_BIG_SELECTS=1');
                 $db->query();
-        $query = 'SELECT count(#__ssinstallments.ID), sum( #__sspayments.amount ) AS pamount,#__ssinstallments.amount
-                FROM #__ssinstallments
-                LEFT JOIN #__sspayments ON #__sspayments.installmentID = #__ssinstallments.ID
-                WHERE #__ssinstallments.ContractID ='. $contractID . '
-                GROUP BY #__ssinstallments.ID
-                HAVING pamount <> #__ssinstallments.amount';
+        $query = 'SELECT count(cstm_ssinstallments.ID), sum( cstm_sspayments.amount ) AS pamount,cstm_ssinstallments.amount
+                FROM cstm_ssinstallments
+                LEFT JOIN cstm_sspayments ON cstm_sspayments.installmentID = cstm_ssinstallments.ID
+                WHERE cstm_ssinstallments.ContractID ='. $contractID . '
+                GROUP BY cstm_ssinstallments.ID
+                HAVING pamount <> cstm_ssinstallments.amount';
 
 		//die( $query);
 		$Installments2 = $db->loadResult();

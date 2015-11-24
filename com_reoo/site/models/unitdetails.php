@@ -41,29 +41,29 @@ class reooModelunitdetails extends JModelLegacy
         $resStatExt = ($this->_ext == "_trans")? "_en" : "_ara";
 		
 		
-        $query = 'SELECT #__ssunits.ID as uid, #__ssunits.*, #__ssprojects.ID as pid,#__ssprojects.*, if(#__ssprojects.Name'.$this->_ext.'<>"",#__ssprojects.Name'.$this->_ext.',#__ssprojects.Name) as Name,
-                 if(#__ssregions.Name'.$this->_ext.'<>"",#__ssregions.Name'.$this->_ext.',#__ssregions.Name) as region,
-                 if(#__sscities.Name'.$this->_ext.'<>"",#__sscities.Name'.$this->_ext.',#__sscities.Name) as city,
-                 if(#__ssprovinces.Name'.$this->_ext.'<>"",#__ssprovinces.Name'.$this->_ext.',#__ssprovinces.Name) as province, '
-        . 'if(#__sscategories.Name'.$this->_ext.'<>"",#__sscategories.Name'.$this->_ext.',#__sscategories.Name) as cat,
-            if(#__sssubcategories.Name'.$this->_ext.'<>"",#__sssubcategories.Name'.$this->_ext.',#__sssubcategories.Name) as subcat,
-            if(#__ssfloors.Name'.$this->_ext.'<>"",#__ssfloors.Name'.$this->_ext.',#__ssfloors.Name) as floor,
-             if(#__ssfinishinglevels.Name'.$this->_ext.'<>"",#__ssfinishinglevels.Name'.$this->_ext.',#__ssfinishinglevels.Name) as flevel, '
-        . ' if(#__ssreservationstatus.Name'.$resStatExt.'<>"",#__ssreservationstatus.Name'.$resStatExt.',#__ssreservationstatus.Name) as reserv ,
-             if(#__ssconstructionphases.Name'.$this->_ext.'<>"",#__ssconstructionphases.Name'.$this->_ext.',#__ssconstructionphases.Name) as const,
-             if(#__ssconstructionphasedetails.Name'.$this->_ext.'<>"",#__ssconstructionphasedetails.Name'.$this->_ext.',#__ssconstructionphasedetails.Name) as constdetails,'
-        . 'DATE_FORMAT(DATE(#__ssprojects.IntialDeliveryDate),"%d-%m-%Y") as IntialDeliveryDate, DATE_FORMAT(DATE(#__ssprojects.FinalDeliveryDate),"%d-%m-%Y") as FinalDeliveryDate'
-        . ' FROM #__ssunits inner join #__ssprojects on #__ssunits.ProjectID = #__ssprojects.ID and #__ssunits.ID='.$id
-        . ' left join #__ssregions on #__ssregions.ID = #__ssprojects.RegionID  '
-        . 'left join #__sscities on #__sscities.ID = #__ssregions.CityID  '
-        . 'left join #__ssprovinces on #__ssprovinces.ID = #__sscities.ProvinceID  '
-        . 'left join #__sscategories on #__sscategories.ID = #__ssunits.CategoryID  '
-        . 'left join #__sssubcategories on #__sssubcategories.ID = #__ssunits.SubcategoryID  '
-        . 'left join #__ssfloors on #__ssfloors.ID = #__ssunits.FloorID  '
-        . 'left join #__ssfinishinglevels on #__ssfinishinglevels.ID = #__ssunits.FinishingLevelID  '
-        . 'left join #__ssreservationstatus on #__ssreservationstatus.ID = #__ssunits.ReservationStatusID  '
-        . 'left join #__ssconstructionphases on #__ssconstructionphases.ID = #__ssunits.ConstructionPhaseID  '
-        . 'left join #__ssconstructionphasedetails on #__ssconstructionphasedetails.ID = #__ssunits.ConstructionPhaseDetailID  ';
+        $query = 'SELECT cstm_ssunits.ID as uid, cstm_ssunits.*, cstm_ssprojects.ID as pid,cstm_ssprojects.*, if(cstm_ssprojects.Name'.$this->_ext.'<>"",cstm_ssprojects.Name'.$this->_ext.',cstm_ssprojects.Name) as Name,
+                 if(cstm_ssregions.Name'.$this->_ext.'<>"",cstm_ssregions.Name'.$this->_ext.',cstm_ssregions.Name) as region,
+                 if(cstm_sscities.Name'.$this->_ext.'<>"",cstm_sscities.Name'.$this->_ext.',cstm_sscities.Name) as city,
+                 if(cstm_ssprovinces.Name'.$this->_ext.'<>"",cstm_ssprovinces.Name'.$this->_ext.',cstm_ssprovinces.Name) as province, '
+        . 'if(cstm_sscategories.Name'.$this->_ext.'<>"",cstm_sscategories.Name'.$this->_ext.',cstm_sscategories.Name) as cat,
+            if(cstm_sssubcategories.Name'.$this->_ext.'<>"",cstm_sssubcategories.Name'.$this->_ext.',cstm_sssubcategories.Name) as subcat,
+            if(cstm_ssfloors.Name'.$this->_ext.'<>"",cstm_ssfloors.Name'.$this->_ext.',cstm_ssfloors.Name) as floor,
+             if(cstm_ssfinishinglevels.Name'.$this->_ext.'<>"",cstm_ssfinishinglevels.Name'.$this->_ext.',cstm_ssfinishinglevels.Name) as flevel, '
+        . ' if(cstm_ssreservationstatus.Name'.$resStatExt.'<>"",cstm_ssreservationstatus.Name'.$resStatExt.',cstm_ssreservationstatus.Name) as reserv ,
+             if(cstm_ssconstructionphases.Name'.$this->_ext.'<>"",cstm_ssconstructionphases.Name'.$this->_ext.',cstm_ssconstructionphases.Name) as const,
+             if(cstm_ssconstructionphasedetails.Name'.$this->_ext.'<>"",cstm_ssconstructionphasedetails.Name'.$this->_ext.',cstm_ssconstructionphasedetails.Name) as constdetails,'
+        . 'DATE_FORMAT(DATE(cstm_ssprojects.IntialDeliveryDate),"%d-%m-%Y") as IntialDeliveryDate, DATE_FORMAT(DATE(cstm_ssprojects.FinalDeliveryDate),"%d-%m-%Y") as FinalDeliveryDate'
+        . ' FROM cstm_ssunits inner join cstm_ssprojects on cstm_ssunits.ProjectID = cstm_ssprojects.ID and cstm_ssunits.ID='.$id
+        . ' left join cstm_ssregions on cstm_ssregions.ID = cstm_ssprojects.RegionID  '
+        . 'left join cstm_sscities on cstm_sscities.ID = cstm_ssregions.CityID  '
+        . 'left join cstm_ssprovinces on cstm_ssprovinces.ID = cstm_sscities.ProvinceID  '
+        . 'left join cstm_sscategories on cstm_sscategories.ID = cstm_ssunits.CategoryID  '
+        . 'left join cstm_sssubcategories on cstm_sssubcategories.ID = cstm_ssunits.SubcategoryID  '
+        . 'left join cstm_ssfloors on cstm_ssfloors.ID = cstm_ssunits.FloorID  '
+        . 'left join cstm_ssfinishinglevels on cstm_ssfinishinglevels.ID = cstm_ssunits.FinishingLevelID  '
+        . 'left join cstm_ssreservationstatus on cstm_ssreservationstatus.ID = cstm_ssunits.ReservationStatusID  '
+        . 'left join cstm_ssconstructionphases on cstm_ssconstructionphases.ID = cstm_ssunits.ConstructionPhaseID  '
+        . 'left join cstm_ssconstructionphasedetails on cstm_ssconstructionphasedetails.ID = cstm_ssunits.ConstructionPhaseDetailID  ';
 
         //die($query);
 
@@ -75,7 +75,7 @@ class reooModelunitdetails extends JModelLegacy
 
     function getPimages($PID)
     {
-	$q = 'select Image from #__sspimages where ID = ' . $PID;
+	$q = 'select Image from cstm_sspimages where ID = ' . $PID;
 	$this->_db->setQuery($q);
  	$data = $this->_db->loadResultArray();
 	return $data;

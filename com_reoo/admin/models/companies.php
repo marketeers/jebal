@@ -59,7 +59,7 @@ class companiesModelcompanies extends JModelLegacy {
     function &getData() {
         // Load the data
         if (empty($this->_data)) {
-            $query = " SELECT * FROM #__sscompanies " .
+            $query = " SELECT * FROM cstm_sscompanies " .
                     " WHERE ID = " . $this->_id ;
             $this->_db->setQuery($query);
             $this->_data = $this->_db->loadObject();
@@ -132,7 +132,7 @@ class companiesModelcompanies extends JModelLegacy {
                     $db->RollbackTrans();
                     return false;
                 } else {
-                    $q = "delete from #__ssunits where ProjectID = '" . $cid . "'";
+                    $q = "delete from cstm_ssunits where ProjectID = '" . $cid . "'";
                     $db->setQuery($q);
                     $db->query();
                     if ($db->getErrorNum()) {
@@ -151,14 +151,14 @@ class companiesModelcompanies extends JModelLegacy {
     //load provinces
     function getProvinces() {
         //die($this->_ext);
-        $query = " SELECT ID,Name FROM #__ssprovinces  ";
+        $query = " SELECT ID,Name FROM cstm_ssprovinces  ";
         $this->_db->setQuery($query);
         return $this->_db->loadAssocList();
     }
 
     //load cities
     function getCities() {
-        $query = " SELECT ID, Name,ProvinceID FROM #__sscities ";
+        $query = " SELECT ID, Name,ProvinceID FROM cstm_sscities ";
         $this->_db->setQuery($query);
         return $this->_db->loadAssocList();
     }
@@ -168,7 +168,7 @@ class companiesModelcompanies extends JModelLegacy {
      */
 
     function getRegions() {
-        $query = " SELECT ID,Name,CityID FROM #__ssregions ";
+        $query = " SELECT ID,Name,CityID FROM cstm_ssregions ";
         $this->_db->setQuery($query);
         return $this->_db->loadAssocList();
     }
@@ -178,7 +178,7 @@ class companiesModelcompanies extends JModelLegacy {
      */
 
     function getConstructionPhases() {
-        $query = " SELECT ID,Name FROM #__ssconstructionphases ";
+        $query = " SELECT ID,Name FROM cstm_ssconstructionphases ";
         $this->_db->setQuery($query);
         return $this->_db->loadAssocList();
     }
@@ -188,7 +188,7 @@ class companiesModelcompanies extends JModelLegacy {
      */
 
     function getConstructionPhaseDetailsSingle($ConstructionPhaseID) {
-        $query = " SELECT ID,Name FROM #__ssconstructionphasedetails  WHERE  PhaseID='" . $ConstructionPhaseID . "'";
+        $query = " SELECT ID,Name FROM cstm_ssconstructionphasedetails  WHERE  PhaseID='" . $ConstructionPhaseID . "'";
         $this->_db->setQuery($query);
         return $this->_db->loadAssocList();
     }
@@ -198,15 +198,15 @@ class companiesModelcompanies extends JModelLegacy {
      */
 
     function getConstructionPhaseDetails() {
-        $query = " SELECT ID,Name,PhaseID FROM #__ssconstructionphasedetails order by PhaseID";
+        $query = " SELECT ID,Name,PhaseID FROM cstm_ssconstructionphasedetails order by PhaseID";
         $this->_db->setQuery($query);
         return $this->_db->loadAssocList();
     }
 
     function getProvinceCityOfProject($regionId) {
         $query = " SELECT CityID , ProvinceID From
-                  #__ssregions inner join #__sscities on #__ssregions.CityID= #__sscities.ID
-                  WHERE #__ssregions.ID='" . $regionId . "'";
+                  cstm_ssregions inner join cstm_sscities on cstm_ssregions.CityID= cstm_sscities.ID
+                  WHERE cstm_ssregions.ID='" . $regionId . "'";
         //die($query);
         $this->_db->setQuery($query);
         return $this->_db->loadAssoc();
@@ -217,14 +217,14 @@ class companiesModelcompanies extends JModelLegacy {
     //load provinces
     function getProvincesNew() {
         //die($this->_ext);
-        $query = " SELECT ID,Name FROM #__ssprovinces WHERE ID LIKE 'WebSite%' ";
+        $query = " SELECT ID,Name FROM cstm_ssprovinces WHERE ID LIKE 'WebSite%' ";
         $this->_db->setQuery($query);
         return $this->_db->loadAssocList();
     }
 
     //load cities
     function getCitiesNew() {
-        $query = " SELECT ID, Name,ProvinceID FROM #__sscities WHERE ID LIKE 'WebSite%'";
+        $query = " SELECT ID, Name,ProvinceID FROM cstm_sscities WHERE ID LIKE 'WebSite%'";
         $this->_db->setQuery($query);
         return $this->_db->loadAssocList();
     }
@@ -234,7 +234,7 @@ class companiesModelcompanies extends JModelLegacy {
      */
 
     function getRegionsNew() {
-        $query = " SELECT ID,Name,CityID FROM #__ssregions WHERE ID LIKE 'WebSite%'";
+        $query = " SELECT ID,Name,CityID FROM cstm_ssregions WHERE ID LIKE 'WebSite%'";
         $this->_db->setQuery($query);
         return $this->_db->loadAssocList();
     }
@@ -244,7 +244,7 @@ class companiesModelcompanies extends JModelLegacy {
      */
 
     function getConstructionPhasesNew() {
-        $query = " SELECT ID,Name FROM #__ssconstructionphases WHERE ID LIKE 'WebSite%'";
+        $query = " SELECT ID,Name FROM cstm_ssconstructionphases WHERE ID LIKE 'WebSite%'";
         $this->_db->setQuery($query);
         return $this->_db->loadAssocList();
     }
@@ -254,7 +254,7 @@ class companiesModelcompanies extends JModelLegacy {
      */
 
     function getConstructionPhaseDetailsSingleNew($ConstructionPhaseID) {
-        $query = " SELECT ID,Name FROM #__ssconstructionphasedetails  WHERE ID LIKE 'WebSite%' AND PhaseID='" . $ConstructionPhaseID . "'";
+        $query = " SELECT ID,Name FROM cstm_ssconstructionphasedetails  WHERE ID LIKE 'WebSite%' AND PhaseID='" . $ConstructionPhaseID . "'";
         $this->_db->setQuery($query);
         return $this->_db->loadAssocList();
     }
@@ -264,7 +264,7 @@ class companiesModelcompanies extends JModelLegacy {
      */
 
     function getConstructionPhaseDetailsNew() {
-        $query = " SELECT ID,Name,PhaseID FROM #__ssconstructionphasedetails WHERE ID LIKE 'WebSite%' order by PhaseID";
+        $query = " SELECT ID,Name,PhaseID FROM cstm_ssconstructionphasedetails WHERE ID LIKE 'WebSite%' order by PhaseID";
         $this->_db->setQuery($query);
         return $this->_db->loadAssocList();
     }

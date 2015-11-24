@@ -37,7 +37,7 @@ class importModelcompanieslist extends JModelLegacy
 	function _buildQuery()
 	{
 		$query = ' SELECT * '
-			. ' FROM #__sscompanies '
+			. ' FROM cstm_sscompanies '
 		;
 
 		return $query;

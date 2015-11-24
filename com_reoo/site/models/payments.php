@@ -30,10 +30,10 @@ class reooModelpayments extends JModelLegacy
         $contractID = JRequest::getVar("id");
 		$db =& JFactory::getDBO();
 
-		$query = 'SELECT sum( #__sspayments.Amount ) AS paid
-                  FROM #__ssinstallments
-                  INNER JOIN #__sspayments ON #__sspayments.installmentID = #__ssinstallments.ID
-                  and #__ssinstallments.ContractID =' . $contractID;
+		$query = 'SELECT sum( cstm_sspayments.Amount ) AS paid
+                  FROM cstm_ssinstallments
+                  INNER JOIN cstm_sspayments ON cstm_sspayments.installmentID = cstm_ssinstallments.ID
+                  and cstm_ssinstallments.ContractID =' . $contractID;
 		//die($query);
                 $db->setQuery( $query );
 		$customerUnits = $db->loadResult();
@@ -53,20 +53,20 @@ class reooModelpayments extends JModelLegacy
         $db->setQuery('SET SQL_BIG_SELECTS=1');
                 $db->query();
 
-		$query = 'SELECT #__ssinstallments.Amount,if(Type'.$ext.'<>"",Type'.$ext.',Type) as Type,DATE_FORMAT(DATE(#__ssinstallments.Date),"%d-%m-%Y") as idate
-                  FROM #__ssinstallments left join #__sspayments on #__sspayments.installmentID = #__ssinstallments.ID
-                  where #__ssinstallments.ContractID='. $contractID . ' and #__sspayments.ID is NULL order by #__ssinstallments.Date';
+		$query = 'SELECT cstm_ssinstallments.Amount,if(Type'.$ext.'<>"",Type'.$ext.',Type) as Type,DATE_FORMAT(DATE(cstm_ssinstallments.Date),"%d-%m-%Y") as idate
+                  FROM cstm_ssinstallments left join cstm_sspayments on cstm_sspayments.installmentID = cstm_ssinstallments.ID
+                  where cstm_ssinstallments.ContractID='. $contractID . ' and cstm_sspayments.ID is NULL order by cstm_ssinstallments.Date';
 
-        $query = '(SELECT #__ssinstallments.Amount, if(Type'.$ext.'<>"",Type'.$ext.',Type) as Type,DATE_FORMAT(DATE(#__ssinstallments.Date),"%d-%m-%Y") as idate , "0" as pamount, #__ssinstallments.Date
-                  FROM #__ssinstallments left join #__sspayments on #__sspayments.installmentID = #__ssinstallments.ID
-                  where #__ssinstallments.ContractID= '. $contractID . ' and #__sspayments.ID is NULL order by #__ssinstallments.Date)
+        $query = '(SELECT cstm_ssinstallments.Amount, if(Type'.$ext.'<>"",Type'.$ext.',Type) as Type,DATE_FORMAT(DATE(cstm_ssinstallments.Date),"%d-%m-%Y") as idate , "0" as pamount, cstm_ssinstallments.Date
+                  FROM cstm_ssinstallments left join cstm_sspayments on cstm_sspayments.installmentID = cstm_ssinstallments.ID
+                  where cstm_ssinstallments.ContractID= '. $contractID . ' and cstm_sspayments.ID is NULL order by cstm_ssinstallments.Date)
                     union
-                    (SELECT #__ssinstallments.amount,if(Type'.$ext.'<>"",Type'.$ext.',Type) as Type,DATE_FORMAT(DATE(#__ssinstallments.Date),"%d-%m-%Y") as idate, sum( #__sspayments.amount ) AS pamount, #__ssinstallments.Date
-                    FROM #__ssinstallments
-                    LEFT JOIN #__sspayments ON #__sspayments.installmentID = #__ssinstallments.ID
-                    WHERE #__ssinstallments.ContractID ='. $contractID . '
-                    GROUP BY #__ssinstallments.ID
-                    HAVING pamount <> #__ssinstallments.amount)
+                    (SELECT cstm_ssinstallments.amount,if(Type'.$ext.'<>"",Type'.$ext.',Type) as Type,DATE_FORMAT(DATE(cstm_ssinstallments.Date),"%d-%m-%Y") as idate, sum( cstm_sspayments.amount ) AS pamount, cstm_ssinstallments.Date
+                    FROM cstm_ssinstallments
+                    LEFT JOIN cstm_sspayments ON cstm_sspayments.installmentID = cstm_ssinstallments.ID
+                    WHERE cstm_ssinstallments.ContractID ='. $contractID . '
+                    GROUP BY cstm_ssinstallments.ID
+                    HAVING pamount <> cstm_ssinstallments.amount)
                     order by date';
         //mysql_query("set sql_big_selects=1");
 		$db->setQuery( $query );
