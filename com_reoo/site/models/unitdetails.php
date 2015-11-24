@@ -53,7 +53,7 @@ class reooModelunitdetails extends JModelLegacy
              if(#__ssconstructionphases.Name'.$this->_ext.'<>"",#__ssconstructionphases.Name'.$this->_ext.',#__ssconstructionphases.Name) as const,
              if(#__ssconstructionphasedetails.Name'.$this->_ext.'<>"",#__ssconstructionphasedetails.Name'.$this->_ext.',#__ssconstructionphasedetails.Name) as constdetails,'
         . 'DATE_FORMAT(DATE(#__ssprojects.IntialDeliveryDate),"%d-%m-%Y") as IntialDeliveryDate, DATE_FORMAT(DATE(#__ssprojects.FinalDeliveryDate),"%d-%m-%Y") as FinalDeliveryDate'
-        . ' FROM #__ssunits LEFT join #__ssprojects on #__ssunits.ProjectID = #__ssprojects.ID and #__ssunits.ID='.$id
+        . ' FROM #__ssunits inner join #__ssprojects on #__ssunits.ProjectID = #__ssprojects.ID and #__ssunits.ID='.$id
         . ' left join #__ssregions on #__ssregions.ID = #__ssprojects.RegionID  '
         . 'left join #__sscities on #__sscities.ID = #__ssregions.CityID  '
         . 'left join #__ssprovinces on #__ssprovinces.ID = #__sscities.ProvinceID  '
@@ -68,7 +68,6 @@ class reooModelunitdetails extends JModelLegacy
         //die($query);
 
         $data = $this->_getList( $query );
-
         return $data;
 
     }//function

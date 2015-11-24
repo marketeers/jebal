@@ -32,7 +32,7 @@ $host		= $uri->toString( array ('scheme', 'host', 'port' ) );
                     <b><?php echo JText::_( 'Phase Name' ); ?></b>
                 </td>
                 <td>
-                    <?php echo $row->region; ?>
+                    <?php echo $row->const; ?>
                 </td>
             </tr>
 			
@@ -82,14 +82,6 @@ $host		= $uri->toString( array ('scheme', 'host', 'port' ) );
                 </td>
                 <td>
                     <?php echo $row->flevel; ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <b><?php //echo JText::_( 'Reservation Status' ); ?></b>
-                </td>
-                <td>
-                    <?php //echo $row->reserv; ?>
                 </td>
             </tr>
             <tr>
