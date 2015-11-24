@@ -40,7 +40,6 @@ class importController extends JControllerLegacy
      */
     function display()
     {
-        ini_set('display_errors','on');
         parent::display();
     }
     

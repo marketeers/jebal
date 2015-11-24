@@ -153,60 +153,60 @@ function AddForgienKeys() {
     //Cities Table
     //Select From Cities tables the ProvinceId and Temp Id and Select from province table the TempId corresponding to it
     //Update the ProvinceId in Cities temp table with the ProvinceTemp ID
-    $QSelectIds = "SELECT cstm_sscities.ID,cstm_sscities.Name,cstm_sscities.ProvinceID,cstm_sscities.TempID,cstm_ssprovincestemp.ID AS ProvinceTempID
-                   FROM cstm_sscities
-                   INNER JOIN cstm_ssprovinces ON cstm_ssprovinces.ID=cstm_sscities.ProvinceID
-                   INNER JOIN cstm_ssprovincestemp ON cstm_ssprovincestemp.ID=cstm_ssprovinces.TempID";
-    //WHERE cstm_sscities.ID LIKE '".$prefix."%'";
+    $QSelectIds = "SELECT #__sscities.ID,#__sscities.Name,#__sscities.ProvinceID,#__sscities.TempID,#__ssprovincestemp.ID AS ProvinceTempID
+                   FROM #__sscities
+                   INNER JOIN #__ssprovinces ON #__ssprovinces.ID=#__sscities.ProvinceID
+                   INNER JOIN #__ssprovincestemp ON #__ssprovincestemp.ID=#__ssprovinces.TempID";
+    //WHERE #__sscities.ID LIKE '".$prefix."%'";
     //print_r($QSelectIds);
     $db->setQuery($QSelectIds);
     $IdsProvinces = $db->loadObjectList();
 
     for ($row = 0; $row < count($IdsProvinces); $row++) {
         //Update the PrvinceTempID in citiestable with the Ids from provincetemp table
-        $QUpdateCities = " UPDATE cstm_sscities SET ProvinceTempID=" . $IdsProvinces[$row]->ProvinceTempID .
-                " WHERE cstm_sscities.ID='" . $IdsProvinces[$row]->ID . "'";
+        $QUpdateCities = " UPDATE #__sscities SET ProvinceTempID=" . $IdsProvinces[$row]->ProvinceTempID .
+                " WHERE #__sscities.ID='" . $IdsProvinces[$row]->ID . "'";
         $db->setQuery($QUpdateCities);
         $db->query();
     }
     //update for the citiestemp table with the ids of the provinceTempId in cities table
     //select the same names but with different province ids
-    $QSelectdifferentProvinces = "SELECT DISTINCT cstm_sscities.Name,cstm_sscities.ProvinceTempID,cstm_sscities.TempID
-                                  FROM cstm_sscities
-                                  INNER JOIN cstm_ssprovinces ON cstm_ssprovinces.ID=cstm_sscities.ProvinceID
-                                  INNER JOIN cstm_ssprovincestemp ON cstm_ssprovincestemp.ID=cstm_ssprovinces.TempID
-                                  WHERE cstm_sscities.Name IN
-                                  (SELECT cstm_sscities.Name
-                                  FROM cstm_sscities
-                                  GROUP BY cstm_sscities.Name
-                                  HAVING COUNT(DISTINCT cstm_sscities.ProvinceTempID) > 1 ) ";
+    $QSelectdifferentProvinces = "SELECT DISTINCT #__sscities.Name,#__sscities.ProvinceTempID,#__sscities.TempID
+                                  FROM #__sscities
+                                  INNER JOIN #__ssprovinces ON #__ssprovinces.ID=#__sscities.ProvinceID
+                                  INNER JOIN #__ssprovincestemp ON #__ssprovincestemp.ID=#__ssprovinces.TempID
+                                  WHERE #__sscities.Name IN
+                                  (SELECT #__sscities.Name
+                                  FROM #__sscities
+                                  GROUP BY #__sscities.Name
+                                  HAVING COUNT(DISTINCT #__sscities.ProvinceTempID) > 1 ) ";
     //die($QSelectdifferentProvinces);
     $db->setQuery($QSelectdifferentProvinces);
     $differenceProvinces = $db->loadObjectList();
 
     for ($row = 0; $row < (count($differenceProvinces) - 1); $row++) {
         //Insert new column in sscities temp with new province id
-        $QinsertionCitiesTemp = "INSERT INTO cstm_sscitiestemp (Name,ProvinceID) VALUES ('" . $differenceProvinces[$row]->Name . "','" . $differenceProvinces[$row]->ProvinceTempID . "')";
+        $QinsertionCitiesTemp = "INSERT INTO #__sscitiestemp (Name,ProvinceID) VALUES ('" . $differenceProvinces[$row]->Name . "','" . $differenceProvinces[$row]->ProvinceTempID . "')";
         $db->setQuery($QinsertionCitiesTemp);
         $db->query();
 
         //update the cities table of this coloumn with the last id was inserted here
-        $QUpdateCities = "UPDATE cstm_sscities SET TempID=LAST_INSERT_ID()
-                          WHERE cstm_sscities.Name='" . $differenceProvinces[$row]->Name . "' AND cstm_sscities.ProvinceTempID='" . $differenceProvinces[$row]->ProvinceTempID . "'";
+        $QUpdateCities = "UPDATE #__sscities SET TempID=LAST_INSERT_ID()
+                          WHERE #__sscities.Name='" . $differenceProvinces[$row]->Name . "' AND #__sscities.ProvinceTempID='" . $differenceProvinces[$row]->ProvinceTempID . "'";
         $db->setQuery($QUpdateCities);
         $db->query();
     }
 
     //Update the cities temp table with original ProvinceIds from Province Table
-    $UpdateCitiesTemp = "UPDATE cstm_sscitiestemp
-                        SET cstm_sscitiestemp.ProvinceID=( SELECT cstm_sscities.ProvinceTempID
-                                                        FROM cstm_sscities
-                                                        WHERE cstm_sscitiestemp.ID = cstm_sscities.TempID
-                                                        group by cstm_sscities.TempID)
+    $UpdateCitiesTemp = "UPDATE #__sscitiestemp
+                        SET #__sscitiestemp.ProvinceID=( SELECT #__sscities.ProvinceTempID
+                                                        FROM #__sscities
+                                                        WHERE #__sscitiestemp.ID = #__sscities.TempID
+                                                        group by #__sscities.TempID)
                         WHERE EXISTS
-                        ( SELECT cstm_sscities.ProvinceTempID
-                        FROM cstm_sscities
-                        WHERE cstm_sscitiestemp.ID = cstm_sscities.TempID)";
+                        ( SELECT #__sscities.ProvinceTempID
+                        FROM #__sscities
+                        WHERE #__sscitiestemp.ID = #__sscities.TempID)";
     //print_r($UpdateCitiesTemp);
     $db->setQuery($UpdateCitiesTemp);
     $db->query();
@@ -215,63 +215,63 @@ function AddForgienKeys() {
     //Regions Table
     //Select From Cities tables the ProvinceId and Temp Id and Select from province table the TempId corresponding to it
     //Update the ProvinceId in Cities temp table with the ProvinceTemp ID
-    $QSelectIds = "SELECT cstm_ssregions.ID,cstm_ssregions.Name,cstm_ssregions.CityID,cstm_ssregions.TempID,cstm_sscitiestemp.ID AS CityTempID
-                   FROM cstm_ssregions
-                   INNER JOIN cstm_sscities ON cstm_sscities.ID=cstm_ssregions.CityID
-                   INNER JOIN cstm_sscitiestemp ON cstm_sscitiestemp.ID=cstm_sscities.TempID";
-    //WHERE cstm_ssregions.ID LIKE '".$prefix."%'";
+    $QSelectIds = "SELECT #__ssregions.ID,#__ssregions.Name,#__ssregions.CityID,#__ssregions.TempID,#__sscitiestemp.ID AS CityTempID
+                   FROM #__ssregions
+                   INNER JOIN #__sscities ON #__sscities.ID=#__ssregions.CityID
+                   INNER JOIN #__sscitiestemp ON #__sscitiestemp.ID=#__sscities.TempID";
+    //WHERE #__ssregions.ID LIKE '".$prefix."%'";
     //die($QSelectIds);
     $db->setQuery($QSelectIds);
     $IdsProvinces = $db->loadObjectList();
 
     for ($row = 0; $row < count($IdsProvinces); $row++) {
         //Update the PrvinceTempID in citiestable with the ProvinceTempId from provincetemp table
-        $QUpdateCities = " UPDATE cstm_ssregions SET CityTempID=" . $IdsProvinces[$row]->CityTempID .
-                " WHERE cstm_ssregions.ID='" . $IdsProvinces[$row]->ID . "'";
+        $QUpdateCities = " UPDATE #__ssregions SET CityTempID=" . $IdsProvinces[$row]->CityTempID .
+                " WHERE #__ssregions.ID='" . $IdsProvinces[$row]->ID . "'";
         //die($QUpdateCities);
         $db->setQuery($QUpdateCities);
         $db->query();
     }
 
     //select the same names but with different province ids
-    $QSelectdifferentProvinces = "SELECT DISTINCT cstm_ssregions.Name,cstm_ssregions.CityTempID,cstm_ssregions.TempID
-                                  FROM cstm_ssregions
-                                  INNER JOIN cstm_sscities ON cstm_sscities.ID=cstm_ssregions.CityID
-                                  INNER JOIN cstm_sscitiestemp ON cstm_sscitiestemp.ID=cstm_sscities.TempID
-                                  WHERE cstm_ssregions.Name IN
-                                  (SELECT cstm_ssregions.Name
-                                  FROM cstm_ssregions
-                                  GROUP BY cstm_ssregions.Name
-                                  HAVING COUNT(DISTINCT cstm_ssregions.CityTempID) > 1 ) ";
+    $QSelectdifferentProvinces = "SELECT DISTINCT #__ssregions.Name,#__ssregions.CityTempID,#__ssregions.TempID
+                                  FROM #__ssregions
+                                  INNER JOIN #__sscities ON #__sscities.ID=#__ssregions.CityID
+                                  INNER JOIN #__sscitiestemp ON #__sscitiestemp.ID=#__sscities.TempID
+                                  WHERE #__ssregions.Name IN
+                                  (SELECT #__ssregions.Name
+                                  FROM #__ssregions
+                                  GROUP BY #__ssregions.Name
+                                  HAVING COUNT(DISTINCT #__ssregions.CityTempID) > 1 ) ";
     //die($QSelectdifferentProvinces);
     $db->setQuery($QSelectdifferentProvinces);
     $differenceProvinces = $db->loadObjectList();
 
     for ($row = 0; $row < (count($differenceProvinces) - 1); $row++) {
         //Insert new column in sscities temp with new province id
-        $QinsertionCitiesTemp = "INSERT INTO cstm_ssregionstemp (Name,CityID) VALUES ('" . $differenceProvinces[$row]->Name . "','" . $differenceProvinces[$row]->CityTempID . "')";
+        $QinsertionCitiesTemp = "INSERT INTO #__ssregionstemp (Name,CityID) VALUES ('" . $differenceProvinces[$row]->Name . "','" . $differenceProvinces[$row]->CityTempID . "')";
         //print_r("Insertion " . $QinsertionCitiesTemp);
         $db->setQuery($QinsertionCitiesTemp);
         $db->query();
 
         //update the cities table of this coloumn with the last id was inserted here
-        $QUpdateCities = "UPDATE cstm_ssregions SET TempID=LAST_INSERT_ID()
-                          WHERE cstm_ssregions.CityTempID='" . $differenceProvinces[$row]->CityTempID . "' AND cstm_ssregions.Name='" . $differenceProvinces[$row]->Name . "'";
+        $QUpdateCities = "UPDATE #__ssregions SET TempID=LAST_INSERT_ID()
+                          WHERE #__ssregions.CityTempID='" . $differenceProvinces[$row]->CityTempID . "' AND #__ssregions.Name='" . $differenceProvinces[$row]->Name . "'";
         //die($QUpdateCities);
         $db->setQuery($QUpdateCities);
         $db->query();
     }
 
     //Update the regions temp table with original CitiesIds from Cities Table
-    $UpdateRegionsTemp = "UPDATE cstm_ssregionstemp
-                        SET cstm_ssregionstemp.CityID=( SELECT cstm_ssregions.CityTempID
-                                                        FROM cstm_ssregions
-                                                        WHERE cstm_ssregionstemp.ID = cstm_ssregions.TempID
-                                                        group by cstm_ssregions.TempID)
+    $UpdateRegionsTemp = "UPDATE #__ssregionstemp
+                        SET #__ssregionstemp.CityID=( SELECT #__ssregions.CityTempID
+                                                        FROM #__ssregions
+                                                        WHERE #__ssregionstemp.ID = #__ssregions.TempID
+                                                        group by #__ssregions.TempID)
                         WHERE EXISTS
-                        ( SELECT cstm_ssregions.CityTempID
-                          FROM cstm_ssregions
-                          WHERE cstm_ssregionstemp.ID = cstm_ssregions.TempID)";
+                        ( SELECT #__ssregions.CityTempID
+                          FROM #__ssregions
+                          WHERE #__ssregionstemp.ID = #__ssregions.TempID)";
     //die($UpdateRegionsTemp);
     $db->setQuery($UpdateRegionsTemp);
     $db->query();
@@ -295,7 +295,7 @@ function SaveDataSearch($filepath, $file, &$passedContentsChecks, $prefix) {
 
     $db = & JFactory::getDBO(); //$this->_db;
     $db->BeginTrans();
-    $tablename = "cstm_ss" . strtolower(substr($file, 0, -4));
+    $tablename = "#__ss" . strtolower(substr($file, 0, -4));
 
     //delete perivous data from the temp tables
     $Qdelete = "Delete FROM " . $tablename . "temp";
@@ -337,7 +337,7 @@ function SaveDataSearch($filepath, $file, &$passedContentsChecks, $prefix) {
         //Check Dupliacte Names in table
         /*
           SELECT `Name`, COUNT(*)
-          FROM   brg_ssfloors
+          FROM   #__ssfloors
           GROUP BY `Name`
           HAVING  COUNT(*) > 1
          */
@@ -428,7 +428,7 @@ function SaveDatatempProjectUnits($filepath, $file, $prefix) {
     $db = & JFactory::getDBO(); //$this->_db;
     $db->BeginTrans();
 
-    $tablename = "cstm_sstemp";
+    $tablename = "#__sstemp";
     //Delete the temp Table
     $Qdel = "DELETE FROM $tablename";
 
@@ -464,8 +464,8 @@ function SaveDatatempProjectUnits($filepath, $file, $prefix) {
     }
 
     //Check For values not in existing IDs
-    $tablename = "cstm_ss" . strtolower(substr($file, 0, -4));
-    $Q = "DELETE FROM $tablename WHERE $tablename.ID NOT IN (SELECT cstm_sstemp.ID FROM cstm_sstemp)
+    $tablename = "#__ss" . strtolower(substr($file, 0, -4));
+    $Q = "DELETE FROM $tablename WHERE $tablename.ID NOT IN (SELECT #__sstemp.ID FROM #__sstemp)
     AND $tablename.ID BETWEEN $fromnum AND $tonum AND ID NOT LIKE '30000%'";
 
     $db->setQuery($Q);
@@ -502,7 +502,7 @@ function SaveDatatemp($filepath, $file, $prefix) {
     $db = & JFactory::getDBO(); //$this->_db;
     $db->BeginTrans();
 
-    $tablename = "cstm_sstemp";
+    $tablename = "#__sstemp";
     //Delete the temp Table
     $Qdel = "DELETE FROM $tablename";
 
@@ -517,7 +517,7 @@ function SaveDatatemp($filepath, $file, $prefix) {
 
     if ((strtolower($file) == "regions.csv" || strtolower($file) == "cities.csv" || strtolower($file) == "provinces.csv" || strtolower($file) == "categories.csv" || strtolower($file) == "floors.csv") && strtolower(JFile::getExt($file)) == 'csv')
     {
-        $tablename = "cstm_sstemp";
+        $tablename = "#__sstemp";
         for ($row = 0; $row < $RecordsNo; $row++) {
             $dataPrefix = str_split($csvFile->fields[$row][0], 1);
             //check if the id of existingIds is the same id of the selected company
@@ -542,8 +542,8 @@ function SaveDatatemp($filepath, $file, $prefix) {
         }
 
         //Check For values not in existing IDs
-        $tablename = "cstm_ss" . strtolower(substr($file, 0, -4));
-        $Q = "DELETE FROM $tablename WHERE $tablename.ID NOT IN (SELECT cstm_sstemp.ID FROM cstm_sstemp)
+        $tablename = "#__ss" . strtolower(substr($file, 0, -4));
+        $Q = "DELETE FROM $tablename WHERE $tablename.ID NOT IN (SELECT #__sstemp.ID FROM #__sstemp)
         AND $tablename.ID BETWEEN $fromnum AND $tonum AND ID NOT LIKE '30000%'";
 
         $db->setQuery($Q);
@@ -557,7 +557,7 @@ function SaveDatatemp($filepath, $file, $prefix) {
     else
     {
         //Check For values not in existing IDs
-        $tablename = "cstm_ss" . strtolower(substr($file, 0, -4));
+        $tablename = "#__ss" . strtolower(substr($file, 0, -4));
         $Q = "DELETE FROM $tablename WHERE $tablename.IsExists = 0
         AND $tablename.ID BETWEEN $fromnum AND $tonum AND ID NOT LIKE '30000%'";
 
@@ -595,7 +595,7 @@ function SelectDataUsers($filepath, $file, $prefix) {
     $db = & JFactory::getDBO(); //$this->_db;
     $db->BeginTrans();
 
-    $tablename = "cstm_sstemp";
+    $tablename = "#__sstemp";
 
     for ($row = 0; $row < $RecordsNo; $row++) {
         $dataPrefix = str_split($csvFile->fields[$row][0], 1);
@@ -619,8 +619,8 @@ function SelectDataUsers($filepath, $file, $prefix) {
         }
     }
     //Check For values not in existing IDs
-    $tablename = "cstm_ss" . strtolower(substr($file, 0, -4));
-    $usersQ = "select userid from $tablename where $tablename.ID NOT IN (SELECT cstm_sstemp.ID FROM cstm_sstemp)
+    $tablename = "#__ss" . strtolower(substr($file, 0, -4));
+    $usersQ = "select userid from $tablename where $tablename.ID NOT IN (SELECT #__sstemp.ID FROM #__sstemp)
     AND $tablename.ID BETWEEN $fromnum AND $tonum";
 
     $db->setQuery($usersQ);
@@ -656,8 +656,8 @@ function DeleteDataCustomers($file, $prefix) {
     $tonum = ($prefix + 1) * pow(10, 9);
 
     //Check For values not in existing IDs
-    $tablename = "cstm_ss" . strtolower(substr($file, 0, -4));
-    $delQ = "delete from $tablename where $tablename.ID NOT IN (SELECT cstm_sstemp.ID FROM cstm_sstemp)
+    $tablename = "#__ss" . strtolower(substr($file, 0, -4));
+    $delQ = "delete from $tablename where $tablename.ID NOT IN (SELECT #__sstemp.ID FROM #__sstemp)
     AND $tablename.ID BETWEEN $fromnum AND $tonum";
 
     $db->setQuery($delQ);
@@ -668,7 +668,7 @@ function DeleteDataCustomers($file, $prefix) {
         return $errorPos;
     }
     //Delete the temp Table
-    $Qdel = "DELETE FROM cstm_sstemp";
+    $Qdel = "DELETE FROM #__sstemp";
 
     $db->setQuery($Qdel);
     $db->query();
@@ -714,7 +714,7 @@ function SaveData($filepath, $file, &$passedContentsChecks, $prefix) {
         $db = & JFactory::getDBO(); //$this->_db;
         
         // Reset IsExists flag
-        $tablename = "cstm_ss" . strtolower(substr($file, 0, -4));
+        $tablename = "#__ss" . strtolower(substr($file, 0, -4));
         $QReset = "UPDATE $tablename SET IsExists = 0 WHERE $tablename.ID BETWEEN $firestPrefix AND $nextPrefix AND ID NOT LIKE '30000%'";
 
         $db->setQuery($QReset);
@@ -744,7 +744,7 @@ function SaveData($filepath, $file, &$passedContentsChecks, $prefix) {
         $db = & JFactory::getDBO(); //$this->_db;
         $db->BeginTrans();
 
-        $tablename = "cstm_ss" . strtolower(substr($file, 0, -4));
+        $tablename = "#__ss" . strtolower(substr($file, 0, -4));
 
         //die("before " . $firestPrefix . " After " . $nextPrefix);
 
@@ -774,7 +774,7 @@ function SaveData($filepath, $file, &$passedContentsChecks, $prefix) {
                 }
 
                 // 1 - Update IsExists flag
-                $tablename = "cstm_ss" . strtolower(substr($file, 0, -4));
+                $tablename = "#__ss" . strtolower(substr($file, 0, -4));
                 //Set the flag indicates that row exists
                 $QSet = "UPDATE $tablename SET IsExists = 1 WHERE $tablename.ID = " . trim($csvIDsFile->fields[$row][0]) .
                         " AND $tablename.ID BETWEEN $firestPrefix AND $nextPrefix AND ID NOT LIKE '30000%'";
@@ -896,7 +896,7 @@ function SaveCustomers($filepath, $file, &$passedContentsChecks, $prefix) {
             }
 
             //insert customer
-            $tablename = "cstm_sscustomers";
+            $tablename = "#__sscustomers";
             $Q = "insert into $tablename(" . implode(",", $headersArr) . ")
                   VALUES ('" . implode("','", $rowArr) . "')
                 ON DUPLICATE KEY UPDATE Name = VALUES(Name),NameInArabic = VALUES(NameInArabic),Email=VALUES(Email)";
@@ -917,14 +917,14 @@ function SaveCustomers($filepath, $file, &$passedContentsChecks, $prefix) {
                 //add users and permissions
                 //users
                 $numID = $rowArr["ID"] - ($prefix * pow(10, 9));
-                $tablename = "cstm_users";
+                $tablename = "#__users";
                 $Q = "insert  into $tablename (username,name,email,password)
                   VALUES (concat(SUBSTRING_INDEX('" . $rowArr["Name"] . "', ' ', 1)," . $numID . "+123),'" . $rowArr["Name"] . "','" . $rowArr["Email"] . "','" . JUserHelper::getCryptedPassword('123456', $salt) . ':' . $salt . "')";
 
                 $db->setQuery($Q);
                 $db->query();
 				$last_id=$db->insertid();
-					  $Q2 = "insert  into cstm_user_usergroup_map(user_id,group_id) VALUES ('" . $last_id . "',2)";
+					  $Q2 = "insert  into #__user_usergroup_map(user_id,group_id) VALUES ('" . $last_id . "',2)";
 					  $db->setQuery($Q2);
 					  $db->query();
                 if ($db->getErrorNum()) {
@@ -934,7 +934,7 @@ function SaveCustomers($filepath, $file, &$passedContentsChecks, $prefix) {
                 }
 
                 //update customer table set userid field to new inserted user id in users table
-                $updateQ = "update cstm_sscustomers set userid = LAST_INSERT_ID() where ID = " . $rowArr["ID"];
+                $updateQ = "update #__sscustomers set userid = LAST_INSERT_ID() where ID = " . $rowArr["ID"];
 
                 $db->setQuery($updateQ);
                 $db->query();
@@ -948,7 +948,7 @@ function SaveCustomers($filepath, $file, &$passedContentsChecks, $prefix) {
                 Commented Out By Abdo 
                 //$ids[] = mysql_insert_id();
                 //core_acl_aro
-                $tablename = "cstm_core_acl_aro";
+                $tablename = "#__core_acl_aro";
                 $Q = "insert  into $tablename (section_value,value,name)
                   VALUES ('users',LAST_INSERT_ID(),'" . $rowArr["Name"] . "')";
 
@@ -961,7 +961,7 @@ function SaveCustomers($filepath, $file, &$passedContentsChecks, $prefix) {
                 }
 
                 //_core_acl_groups_aro_map
-                $tablename = "cstm_core_acl_groups_aro_map";
+                $tablename = "#__core_acl_groups_aro_map";
                 $Q = "insert  into $tablename(group_id,aro_id)
                   VALUES (18,LAST_INSERT_ID())";
 
@@ -980,7 +980,7 @@ function SaveCustomers($filepath, $file, &$passedContentsChecks, $prefix) {
                 {
                     //if ($db->getAffectedRows()== 2) // record updated
                     $numID = $rowArr["ID"] - ($prefix * pow(10, 9));
-                    $tablename = "cstm_users";
+                    $tablename = "#__users";
                     $Q = "update $tablename set email = '" . $rowArr["Email"] . "' , name = '" . $rowArr["Name"] . "' where username = concat(SUBSTRING_INDEX('" . $rowArr["Name"] . "', ' ', 1)," . $numID . "+123)";
 
                     //die($Q);
@@ -1258,7 +1258,7 @@ function handleDeletedRows($filepath, $prefix, $passedContentsChecks) {
                     
                     if (strtolower($file) != "customers.csv" && strtolower($file) != "regions.csv" && strtolower($file) != "cities.csv" && strtolower($file) != "provinces.csv" && strtolower($file) != "categories.csv" && strtolower($file) != "floors.csv"){
                         //Count the unsyncroniced records
-                        $tablename = "cstm_ss" . strtolower(substr($file, 0, -4));
+                        $tablename = "#__ss" . strtolower(substr($file, 0, -4));
                         $Q = "SELECT COUNT(*) FROM $tablename WHERE $tablename.IsExists = 0
                         AND $tablename.ID BETWEEN $fromnum AND $tonum AND ID NOT LIKE '30000%'";
 
@@ -1329,8 +1329,8 @@ $fromnum = $prefix * (pow(10, 9));
 $tonum = ($prefix + 1) * (pow(10, 9));
 
 for ($i = 0; $i < count($tablesArr); $i++) {
-    //$q = "truncate table cstm_" . $tablesArr[$i];
-    $q = "DELETE FROM cstm_" . $tablesArr[$i] . " WHERE ID BETWEEN $fromnum AND  $tonum";
+    //$q = "truncate table #__" . $tablesArr[$i];
+    $q = "DELETE FROM #__" . $tablesArr[$i] . " WHERE ID BETWEEN $fromnum AND  $tonum";
     //die($q);
     $db->setQuery($q);
     $db->query();
@@ -1341,14 +1341,14 @@ for ($i = 0; $i < count($tablesArr); $i++) {
     }
 }
 //"sscustomers",
-$SelecQ = "SELECT userid FROM cstm_sscustomers WHERE ID BETWEEN $fromnum AND  $tonum";
+$SelecQ = "SELECT userid FROM #__sscustomers WHERE ID BETWEEN $fromnum AND  $tonum";
 //die($q);
 $db->setQuery($SelecQ);
 $usersIds = $db->loadResultArray();
 
 for ($i = 0; $i < count($usersIds); $i++) {
 
-    $delQ = "DELETE FROM cstm_users WHERE ID=$usersIds[$i]";
+    $delQ = "DELETE FROM #__users WHERE ID=$usersIds[$i]";
     $db->setQuery($delQ);
     $db->query();
 
@@ -1358,12 +1358,12 @@ for ($i = 0; $i < count($usersIds); $i++) {
         return "deletion failed for users";
     }
 
-    $q = "SELECT  id from cstm_core_acl_aro where value = $usersIds[$i]";
+    $q = "SELECT  id from #__core_acl_aro where value = $usersIds[$i]";
     $db->setQuery($q);
     $core_aro = $db->loadResultArray();
 
     if (!empty($core_aro[0])) {
-        $q = "DELETE  from cstm_core_acl_aro where id = $core_aro[0] ";
+        $q = "DELETE  from #__core_acl_aro where id = $core_aro[0] ";
         $db->setQuery($q);
         $db->query();
 
@@ -1373,7 +1373,7 @@ for ($i = 0; $i < count($usersIds); $i++) {
             return "deletion failed for core users";
         }
 
-        $q = "delete from cstm_core_acl_groups_aro_map where aro_id = $core_aro[0] ";
+        $q = "delete from #__core_acl_groups_aro_map where aro_id = $core_aro[0] ";
         $db->setQuery($q);
         $db->query();
 
@@ -1386,7 +1386,7 @@ for ($i = 0; $i < count($usersIds); $i++) {
     }
 }
 
-$q = "DELETE FROM cstm_sscustomers WHERE ID BETWEEN $fromnum AND  $tonum";
+$q = "DELETE FROM #__sscustomers WHERE ID BETWEEN $fromnum AND  $tonum";
 $db->setQuery($q);
 $db->query();
 if ($db->getErrorNum()) {
@@ -1439,7 +1439,7 @@ function GetFileLog($filepath, $file, $prefix) {
     $db = & JFactory::getDBO(); //$this->_db;
     $db->BeginTrans();
 
-     $tablename = "cstm_ss" . strtolower(substr($file, 0, -4));
+     $tablename = "#__ss" . strtolower(substr($file, 0, -4));
     //Reset the flag indicates that row exists
     $QReset = "UPDATE $tablename SET IsExists = 0 WHERE $tablename.ID BETWEEN $fromnum AND $tonum AND ID NOT LIKE '30000%'";
     $db->setQuery($QReset);
@@ -1450,7 +1450,7 @@ function GetFileLog($filepath, $file, $prefix) {
         return $errorPos; //"Error while deleting temp data";
     }
 
-    $tablename = "cstm_sstemp";
+    $tablename = "#__sstemp";
     //Delete the temp Table
     $Qdel = "DELETE FROM $tablename";
     $db->setQuery($Qdel);
@@ -1487,18 +1487,18 @@ function GetFileLog($filepath, $file, $prefix) {
     $UpdateRows = 0;
     $DeleteRows = 0;
 
-    $tablename = "cstm_ss" . strtolower(substr($file, 0, -4));
+    $tablename = "#__ss" . strtolower(substr($file, 0, -4));
 
     //Count the number of rows to be inserted
-    $Q_InsertRows = "SELECT Count(cstm_sstemp.ID) FROM cstm_sstemp WHERE cstm_sstemp.ID NOT IN
+    $Q_InsertRows = "SELECT Count(#__sstemp.ID) FROM #__sstemp WHERE #__sstemp.ID NOT IN
     (SELECT $tablename.ID FROM $tablename WHERE $tablename.ID BETWEEN $fromnum AND $tonum AND ID NOT LIKE '30000%') ";
 
     //Count the number of rows to be updated
-    $Q_UpdateRows = "SELECT Count($tablename.ID) FROM $tablename WHERE $tablename.ID IN (SELECT cstm_sstemp.ID FROM cstm_sstemp)
+    $Q_UpdateRows = "SELECT Count($tablename.ID) FROM $tablename WHERE $tablename.ID IN (SELECT #__sstemp.ID FROM #__sstemp)
     AND $tablename.ID BETWEEN $fromnum AND $tonum AND ID NOT LIKE '30000%'";
 
     //Count the number of rows to be deleted
-    $Q_DeleteRows = "SELECT Count($tablename.ID) FROM $tablename WHERE $tablename.ID NOT IN (SELECT cstm_sstemp.ID FROM cstm_sstemp)
+    $Q_DeleteRows = "SELECT Count($tablename.ID) FROM $tablename WHERE $tablename.ID NOT IN (SELECT #__sstemp.ID FROM #__sstemp)
     AND $tablename.ID BETWEEN $fromnum AND $tonum AND ID NOT LIKE '30000%'";
 
     $db->setQuery($Q_InsertRows);

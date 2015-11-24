@@ -1,8 +1,7 @@
 
-DELETE FROM `cstm_users` WHERE `id` in (SELECT `userid` FROM `cstm_sscustomers`);
 
-DROP TABLE IF EXISTS `cstm_sscategories`;
-CREATE TABLE IF NOT EXISTS `cstm_sscategories` (
+DROP TABLE IF EXISTS `nn8j7_sscategories`;
+CREATE TABLE IF NOT EXISTS `nn8j7_sscategories` (
   `ID` bigint(20) NOT NULL,
   `Name_trans` varchar(100) NOT NULL,
   `Name` varchar(100) NOT NULL,
@@ -12,8 +11,8 @@ CREATE TABLE IF NOT EXISTS `cstm_sscategories` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS `cstm_sscategoriestemp`;
-CREATE TABLE IF NOT EXISTS `cstm_sscategoriestemp` (
+DROP TABLE IF EXISTS `nn8j7_sscategoriestemp`;
+CREATE TABLE IF NOT EXISTS `nn8j7_sscategoriestemp` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `Name_trans` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -21,8 +20,8 @@ CREATE TABLE IF NOT EXISTS `cstm_sscategoriestemp` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 
-DROP TABLE IF EXISTS `cstm_sscities`;
-CREATE TABLE IF NOT EXISTS `cstm_sscities` (
+DROP TABLE IF EXISTS `nn8j7_sscities`;
+CREATE TABLE IF NOT EXISTS `nn8j7_sscities` (
   `ID` bigint(20) NOT NULL,
   `Name_trans` varchar(100) NOT NULL,
   `ProvinceID` bigint(20) NOT NULL,
@@ -34,8 +33,8 @@ CREATE TABLE IF NOT EXISTS `cstm_sscities` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 
-DROP TABLE IF EXISTS `cstm_sscitiestemp`;
-CREATE TABLE IF NOT EXISTS `cstm_sscitiestemp` (
+DROP TABLE IF EXISTS `nn8j7_sscitiestemp`;
+CREATE TABLE IF NOT EXISTS `nn8j7_sscitiestemp` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `Name_trans` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -45,8 +44,8 @@ CREATE TABLE IF NOT EXISTS `cstm_sscitiestemp` (
 
 
 
-DROP TABLE IF EXISTS `cstm_sscompanies`;
-CREATE TABLE IF NOT EXISTS `cstm_sscompanies` (
+DROP TABLE IF EXISTS `nn8j7_sscompanies`;
+CREATE TABLE IF NOT EXISTS `nn8j7_sscompanies` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`ID`)
@@ -54,13 +53,13 @@ CREATE TABLE IF NOT EXISTS `cstm_sscompanies` (
 
 
 
-INSERT INTO `cstm_sscompanies` (`ID`, `Name`) VALUES
+INSERT INTO `nn8j7_sscompanies` (`ID`, `Name`) VALUES
 (1, 'Bridge'),
 (2, 'Personal'),
 (3, 'Website');
 
-DROP TABLE IF EXISTS `cstm_ssconstructionphasedetails`;
-CREATE TABLE IF NOT EXISTS `cstm_ssconstructionphasedetails` (
+DROP TABLE IF EXISTS `nn8j7_ssconstructionphasedetails`;
+CREATE TABLE IF NOT EXISTS `nn8j7_ssconstructionphasedetails` (
   `ID` bigint(20) NOT NULL,
   `Name_trans` varchar(100) NOT NULL,
   `PhaseID` bigint(20) NOT NULL,
@@ -71,8 +70,8 @@ CREATE TABLE IF NOT EXISTS `cstm_ssconstructionphasedetails` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS `cstm_ssconstructionphases`;
-CREATE TABLE IF NOT EXISTS `cstm_ssconstructionphases` (
+DROP TABLE IF EXISTS `nn8j7_ssconstructionphases`;
+CREATE TABLE IF NOT EXISTS `nn8j7_ssconstructionphases` (
   `ID` bigint(20) NOT NULL,
   `Name_trans` varchar(100) NOT NULL,
   `Name` varchar(100) NOT NULL,
@@ -82,8 +81,8 @@ CREATE TABLE IF NOT EXISTS `cstm_ssconstructionphases` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS `cstm_sscontracts`;
-CREATE TABLE IF NOT EXISTS `cstm_sscontracts` (
+DROP TABLE IF EXISTS `nn8j7_sscontracts`;
+CREATE TABLE IF NOT EXISTS `nn8j7_sscontracts` (
   `ID` bigint(20) NOT NULL,
   `CustomerID` bigint(20) NOT NULL,
   `UnitID` bigint(20) NOT NULL,
@@ -94,8 +93,8 @@ CREATE TABLE IF NOT EXISTS `cstm_sscontracts` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS `cstm_sscustomers`;
-CREATE TABLE IF NOT EXISTS `cstm_sscustomers` (
+DROP TABLE IF EXISTS `nn8j7_sscustomers`;
+CREATE TABLE IF NOT EXISTS `nn8j7_sscustomers` (
   `ID` bigint(20) NOT NULL,
   `Name` varchar(100) NOT NULL,
   `NameInArabic` varchar(100) NOT NULL,
@@ -106,8 +105,8 @@ CREATE TABLE IF NOT EXISTS `cstm_sscustomers` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS `cstm_ssfinishinglevels`;
-CREATE TABLE IF NOT EXISTS `cstm_ssfinishinglevels` (
+DROP TABLE IF EXISTS `nn8j7_ssfinishinglevels`;
+CREATE TABLE IF NOT EXISTS `nn8j7_ssfinishinglevels` (
   `ID` bigint(20) NOT NULL,
   `Name_trans` varchar(100) NOT NULL,
   `Name` varchar(100) NOT NULL,
@@ -117,8 +116,8 @@ CREATE TABLE IF NOT EXISTS `cstm_ssfinishinglevels` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS `cstm_ssfloors`;
-CREATE TABLE IF NOT EXISTS `cstm_ssfloors` (
+DROP TABLE IF EXISTS `nn8j7_ssfloors`;
+CREATE TABLE IF NOT EXISTS `nn8j7_ssfloors` (
   `ID` bigint(20) NOT NULL,
   `Name_trans` varchar(100) NOT NULL,
   `Name` varchar(100) NOT NULL,
@@ -128,8 +127,8 @@ CREATE TABLE IF NOT EXISTS `cstm_ssfloors` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS `cstm_ssfloorstemp`;
-CREATE TABLE IF NOT EXISTS `cstm_ssfloorstemp` (
+DROP TABLE IF EXISTS `nn8j7_ssfloorstemp`;
+CREATE TABLE IF NOT EXISTS `nn8j7_ssfloorstemp` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `Name_trans` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -137,8 +136,8 @@ CREATE TABLE IF NOT EXISTS `cstm_ssfloorstemp` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 
-DROP TABLE IF EXISTS `cstm_ssinstallments`;
-CREATE TABLE IF NOT EXISTS `cstm_ssinstallments` (
+DROP TABLE IF EXISTS `nn8j7_ssinstallments`;
+CREATE TABLE IF NOT EXISTS `nn8j7_ssinstallments` (
   `ID` bigint(20) NOT NULL,
   `Type_trans` varchar(100) NOT NULL,
   `Amount` int(11) NOT NULL,
@@ -151,8 +150,8 @@ CREATE TABLE IF NOT EXISTS `cstm_ssinstallments` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS `cstm_ssmodificationdetails`;
-CREATE TABLE IF NOT EXISTS `cstm_ssmodificationdetails` (
+DROP TABLE IF EXISTS `nn8j7_ssmodificationdetails`;
+CREATE TABLE IF NOT EXISTS `nn8j7_ssmodificationdetails` (
   `ID` bigint(20) NOT NULL,
   `ModificationRequest_ID` bigint(20) NOT NULL,
   `ModificationData` text CHARACTER SET utf8 NOT NULL,
@@ -164,8 +163,8 @@ CREATE TABLE IF NOT EXISTS `cstm_ssmodificationdetails` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `cstm_ssmodificationrequest`;
-CREATE TABLE IF NOT EXISTS `cstm_ssmodificationrequest` (
+DROP TABLE IF EXISTS `nn8j7_ssmodificationrequest`;
+CREATE TABLE IF NOT EXISTS `nn8j7_ssmodificationrequest` (
   `ID` bigint(20) NOT NULL,
   `UnitID` bigint(20) NOT NULL,
   `Subject` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -176,8 +175,8 @@ CREATE TABLE IF NOT EXISTS `cstm_ssmodificationrequest` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `cstm_ssmodificationstatus`;
-CREATE TABLE IF NOT EXISTS `cstm_ssmodificationstatus` (
+DROP TABLE IF EXISTS `nn8j7_ssmodificationstatus`;
+CREATE TABLE IF NOT EXISTS `nn8j7_ssmodificationstatus` (
   `ID` bigint(20) NOT NULL,
   `Name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `Name_trans` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -187,8 +186,8 @@ CREATE TABLE IF NOT EXISTS `cstm_ssmodificationstatus` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `cstm_sspayments`;
-CREATE TABLE IF NOT EXISTS `cstm_sspayments` (
+DROP TABLE IF EXISTS `nn8j7_sspayments`;
+CREATE TABLE IF NOT EXISTS `nn8j7_sspayments` (
   `ID` bigint(20) NOT NULL,
   `bankName_ara` varchar(100) NOT NULL,
   `Amount` int(11) NOT NULL,
@@ -205,8 +204,8 @@ CREATE TABLE IF NOT EXISTS `cstm_sspayments` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `cstm_sspimages`;
-CREATE TABLE IF NOT EXISTS `cstm_sspimages` (
+DROP TABLE IF EXISTS `nn8j7_sspimages`;
+CREATE TABLE IF NOT EXISTS `nn8j7_sspimages` (
   `ID` bigint(20) NOT NULL,
   `Image` bigint(20) NOT NULL,
   `IsExists` bit(1) NOT NULL DEFAULT b'1',
@@ -214,8 +213,8 @@ CREATE TABLE IF NOT EXISTS `cstm_sspimages` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS `cstm_ssprojects`;
-CREATE TABLE IF NOT EXISTS `cstm_ssprojects` (
+DROP TABLE IF EXISTS `nn8j7_ssprojects`;
+CREATE TABLE IF NOT EXISTS `nn8j7_ssprojects` (
   `ID` bigint(20) NOT NULL,
   `Nebour_trans` varchar(100) NOT NULL,
   `Name` varchar(100) NOT NULL,
@@ -232,8 +231,8 @@ CREATE TABLE IF NOT EXISTS `cstm_ssprojects` (
   KEY `ID` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
-DROP TABLE IF EXISTS `cstm_ssprovinces`;
-CREATE TABLE IF NOT EXISTS `cstm_ssprovinces` (
+DROP TABLE IF EXISTS `nn8j7_ssprovinces`;
+CREATE TABLE IF NOT EXISTS `nn8j7_ssprovinces` (
   `ID` bigint(20) NOT NULL,
   `Name_trans` varchar(100) NOT NULL,
   `Name` varchar(100) NOT NULL,
@@ -243,8 +242,8 @@ CREATE TABLE IF NOT EXISTS `cstm_ssprovinces` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS `cstm_ssprovincestemp`;
-CREATE TABLE IF NOT EXISTS `cstm_ssprovincestemp` (
+DROP TABLE IF EXISTS `nn8j7_ssprovincestemp`;
+CREATE TABLE IF NOT EXISTS `nn8j7_ssprovincestemp` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `Name_trans` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -252,8 +251,8 @@ CREATE TABLE IF NOT EXISTS `cstm_ssprovincestemp` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 
-DROP TABLE IF EXISTS `cstm_ssregions`;
-CREATE TABLE IF NOT EXISTS `cstm_ssregions` (
+DROP TABLE IF EXISTS `nn8j7_ssregions`;
+CREATE TABLE IF NOT EXISTS `nn8j7_ssregions` (
   `ID` bigint(20) NOT NULL,
   `Name_trans` varchar(100) NOT NULL,
   `CityID` bigint(20) NOT NULL,
@@ -265,8 +264,8 @@ CREATE TABLE IF NOT EXISTS `cstm_ssregions` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS `cstm_ssregionstemp`;
-CREATE TABLE IF NOT EXISTS `cstm_ssregionstemp` (
+DROP TABLE IF EXISTS `nn8j7_ssregionstemp`;
+CREATE TABLE IF NOT EXISTS `nn8j7_ssregionstemp` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) CHARACTER SET utf8 NOT NULL,
   `Name_trans` varchar(255) CHARACTER SET utf8 NOT NULL,
@@ -275,8 +274,8 @@ CREATE TABLE IF NOT EXISTS `cstm_ssregionstemp` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 
-DROP TABLE IF EXISTS `cstm_ssreservationstatus`;
-CREATE TABLE IF NOT EXISTS `cstm_ssreservationstatus` (
+DROP TABLE IF EXISTS `nn8j7_ssreservationstatus`;
+CREATE TABLE IF NOT EXISTS `nn8j7_ssreservationstatus` (
   `ID` bigint(20) NOT NULL,
   `Name_ara` varchar(100) NOT NULL,
   `Name` varchar(100) NOT NULL,
@@ -287,8 +286,8 @@ CREATE TABLE IF NOT EXISTS `cstm_ssreservationstatus` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS `cstm_sssubcategories`;
-CREATE TABLE IF NOT EXISTS `cstm_sssubcategories` (
+DROP TABLE IF EXISTS `nn8j7_sssubcategories`;
+CREATE TABLE IF NOT EXISTS `nn8j7_sssubcategories` (
   `ID` bigint(20) NOT NULL,
   `Name_trans` varchar(100) NOT NULL,
   `CategoryID` bigint(20) NOT NULL,
@@ -299,16 +298,16 @@ CREATE TABLE IF NOT EXISTS `cstm_sssubcategories` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS `cstm_sstemp`;
-CREATE TABLE IF NOT EXISTS `cstm_sstemp` (
+DROP TABLE IF EXISTS `nn8j7_sstemp`;
+CREATE TABLE IF NOT EXISTS `nn8j7_sstemp` (
   `ID` int(11) NOT NULL,
   KEY `ID` (`ID`),
   KEY `ID_2` (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `cstm_ssunits`;
-CREATE TABLE IF NOT EXISTS `cstm_ssunits` (
+DROP TABLE IF EXISTS `nn8j7_ssunits`;
+CREATE TABLE IF NOT EXISTS `nn8j7_ssunits` (
   `ID` bigint(20) NOT NULL,
   `PlotNumber` varchar(50) NOT NULL,
   `ProjectID` bigint(20) NOT NULL,

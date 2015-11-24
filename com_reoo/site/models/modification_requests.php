@@ -31,10 +31,10 @@ class customerunitsModelmodification_requests extends JModelLegacy
 		$db =& JFactory::getDBO();
 
 		$query = 'SELECT Subject , ModificationData, PossibiltyToDo, Name
-        FROM cstm_ssmodification_request
-        inner join cstm_ssmodification_details on cstm_ssmodification_details.ModificationRequest_ID = cstm_ssmodification_request.Id
-        inner join cstm_ssmodification_status on cstm_ssmodification_status.Id = cstm_ssmodification_request.ModificationStatus
-        and cstm_ssmodification_request.UnitID = ' . $unitID;
+        FROM #__ssmodification_request
+        inner join #__ssmodification_details on #__ssmodification_details.ModificationRequest_ID = #__ssmodification_request.Id
+        inner join #__ssmodification_status on #__ssmodification_status.Id = #__ssmodification_request.ModificationStatus
+        and #__ssmodification_request.UnitID = ' . $unitID;
 		$db->setQuery( $query );
 		$modificationRequests = $db->loadResult();
 

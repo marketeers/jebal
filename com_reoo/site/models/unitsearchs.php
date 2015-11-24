@@ -32,7 +32,7 @@ class reooModelunitsearchs extends JModelLegacy
     function getProvinces()
     {
         //die($this->_ext);
-        $query = ' SELECT ID,if(Name'.$this->_ext.'<>"",Name'.$this->_ext.',Name)as Name FROM cstm_ssprovinces ';
+        $query = ' SELECT ID,if(Name'.$this->_ext.'<>"",Name'.$this->_ext.',Name)as Name FROM #__ssprovinces ';
         $this->_db->setQuery( $query );
 		return $this->_db->loadAssocList ();
     }
@@ -40,7 +40,7 @@ class reooModelunitsearchs extends JModelLegacy
     //load cities
     function getCities()
     {
-         $query = ' SELECT ID,if(Name'.$this->_ext.'<>"",Name'.$this->_ext.',Name)as Name,ProvinceID FROM cstm_sscities ';
+         $query = ' SELECT ID,if(Name'.$this->_ext.'<>"",Name'.$this->_ext.',Name)as Name,ProvinceID FROM #__sscities ';
         $this->_db->setQuery( $query );
 		return $this->_db->loadAssocList ();
     }
@@ -48,7 +48,7 @@ class reooModelunitsearchs extends JModelLegacy
     //load regions
     function getRegions()
     {
-         $query = ' SELECT ID,if(Name'.$this->_ext.'<>"",Name'.$this->_ext.',Name)as Name,CityID FROM cstm_ssregions ';
+         $query = ' SELECT ID,if(Name'.$this->_ext.'<>"",Name'.$this->_ext.',Name)as Name,CityID FROM #__ssregions ';
         $this->_db->setQuery( $query );
 		return $this->_db->loadAssocList ();
     }
@@ -56,7 +56,7 @@ class reooModelunitsearchs extends JModelLegacy
     //load categories
     function getCategories()
     {
-         $query = ' SELECT ID,if(Name'.$this->_ext.'<>"",Name'.$this->_ext.',Name)as Name FROM cstm_sscategories ';
+         $query = ' SELECT ID,if(Name'.$this->_ext.'<>"",Name'.$this->_ext.',Name)as Name FROM #__sscategories ';
         $this->_db->setQuery( $query );
 		return $this->_db->loadAssocList ();
     }
@@ -64,7 +64,7 @@ class reooModelunitsearchs extends JModelLegacy
     //load  floors
     function getFloors()
     {
-        $query = ' SELECT ID,if(Name'.$this->_ext.'<>"",Name'.$this->_ext.',Name)as Name FROM cstm_ssfloors ';
+        $query = ' SELECT ID,if(Name'.$this->_ext.'<>"",Name'.$this->_ext.',Name)as Name FROM #__ssfloors ';
         $this->_db->setQuery( $query );
 		return $this->_db->loadAssocList ();
     }
@@ -72,7 +72,7 @@ class reooModelunitsearchs extends JModelLegacy
     //load construction phases
     function getConstructionPhases()
     {
-        $query = ' SELECT ID,if(Name'.$this->_ext.'<>"",Name'.$this->_ext.',Name)as Name FROM cstm_ssconstructionphases ';
+        $query = ' SELECT ID,if(Name'.$this->_ext.'<>"",Name'.$this->_ext.',Name)as Name FROM #__ssconstructionphases ';
         $this->_db->setQuery( $query );
 		return $this->_db->loadAssocList ();
     }
@@ -80,7 +80,7 @@ class reooModelunitsearchs extends JModelLegacy
     //load finishing levels
     function getFinishingLevels()
     {
-        $query = ' SELECT ID,if(Name'.$this->_ext.'<>"",Name'.$this->_ext.',Name)as Name FROM cstm_ssfinishinglevels ';
+        $query = ' SELECT ID,if(Name'.$this->_ext.'<>"",Name'.$this->_ext.',Name)as Name FROM #__ssfinishinglevels ';
         $this->_db->setQuery( $query );
 		return $this->_db->loadAssocList ();
     }
@@ -89,7 +89,7 @@ class reooModelunitsearchs extends JModelLegacy
     function getProjects()
     {
         //$this->_db	    = &JFactory::getDBO();
-        $query = ' SELECT ID,if(Name'.$this->_ext.'<>"",Name'.$this->_ext.',Name)as Name FROM cstm_ssprojects ';
+        $query = ' SELECT ID,if(Name'.$this->_ext.'<>"",Name'.$this->_ext.',Name)as Name FROM #__ssprojects ';
         $this->_db->setQuery( $query );
 		return $this->_db->loadAssocList ();
     }

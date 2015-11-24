@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `nn8j7_sscitiestemp` (
 
 
 --
--- Table structure for table `brg_sscompanies`
+-- Table structure for table `#__sscompanies`
 --
 
 DROP TABLE IF EXISTS `nn8j7_sscompanies`;
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `nn8j7_sscompanies` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `brg_sscompanies`
+-- Dumping data for table `#__sscompanies`
 --
 
 INSERT INTO `nn8j7_sscompanies` (`ID`, `Name`) VALUES

@@ -5,8 +5,7 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
  
- 
-ini_set('display_errors','on');
+
 
  // Require specific controller if requested
 if( $controller = JRequest::getWord('controller'))

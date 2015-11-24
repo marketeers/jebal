@@ -29,7 +29,7 @@ class Tablecompanies extends JTable
 	 * @param object Database connector object
 	 */
 	function Tablecompanies(& $db) {
-		parent::__construct('cstm_sscompanies', 'ID', $db);
+		parent::__construct('#__sscompanies', 'ID', $db);
 	}
 }
 ?>
