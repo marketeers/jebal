@@ -28,6 +28,9 @@ class reooController extends JControllerLegacy
 	 */
 	function display()
 	{
+	    $app    = JFactory::getApplication();
+        $pathway = $app->getPathway();
+        $pathway->addItem('My Units', 'component/reoo/?view=customerunits');
 		parent::display();
 	}// function
 	
