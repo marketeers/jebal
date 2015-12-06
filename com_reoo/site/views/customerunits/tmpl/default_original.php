@@ -167,9 +167,6 @@ jQuery(document).ready(function($) {
                 <th>
                     <b><?php echo JText::_('Price'); ?></b>
                 </th>
-				 <th>
-                    <b><?php echo JText::_('Mount Paid'); ?></b>
-                </th>
                 <th>
                     <b><?php echo JText::_('Market Value'); ?></b>
                 </th>
@@ -205,9 +202,6 @@ jQuery(document).ready(function($) {
                 </td>
                 <td>
                     <?php echo $row->paid; ?>
-                </td>
-				 <td>
-                    <?php echo $row->UnitValue; ?>
                 </td>
                 <td>
                     <?php 
