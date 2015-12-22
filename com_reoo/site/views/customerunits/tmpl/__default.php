@@ -168,7 +168,7 @@ jQuery(document).ready(function($) {
                     <b><?php echo JText::_('Price'); ?></b>
                 </th>
 				 <th>
-                    <b><?php echo JText::_('A Mount Paid'); ?></b>
+                    <b><?php echo JText::_('Mount Paid'); ?></b>
                 </th>
                 <th>
                     <b><?php echo JText::_('Market Value'); ?></b>
@@ -198,7 +198,7 @@ jQuery(document).ready(function($) {
                     <a class="fancybox fancybox.iframe" style="font-weight: normal/*bold*/;font-size: 14px;" href=<?php echo $ulink ?> ><?php echo JText::_('Plot Details')?></a> )
                 </td>
                 <td>
-                    <?php echo $row->region; ?>
+                    <?php echo $row->ConstructionPhase; ?>
                 </td>
                 <td>
                     <?php echo $row->TotalValue; ?>

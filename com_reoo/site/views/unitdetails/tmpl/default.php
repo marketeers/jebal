@@ -112,7 +112,7 @@ $host		= $uri->toString( array ('scheme', 'host', 'port' ) );
             </tr>
             <tr>
                 <td valign=top>
-                    <b><?php echo JText::_( 'Image' ); ?></b>
+                    <b><?php echo JText::_( 'Unit Design' ); ?></b>
                 </td>
                 <td>
 
@@ -133,7 +133,7 @@ $host		= $uri->toString( array ('scheme', 'host', 'port' ) );
             if($user->id && isset($_GET['res'])): ?>
             <tr>
                 <td valign=top>
-                    <b><?php echo JText::_( 'Project design' ); ?></b>
+                    <b><?php echo JText::_( 'project progress' ); ?></b>
                 </td>
                 <td>
 

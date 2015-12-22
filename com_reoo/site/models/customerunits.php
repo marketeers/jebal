@@ -37,11 +37,16 @@ class reooModelcustomerunits extends JModelLegacy
 
 
 		$query = 'SELECT #__sscontracts.ID as CID,#__sscontracts.UnitID as ID,#__sscontracts.TotalValue, if(#__ssconstructionphases.Name'.$ext.'<>"",#__ssconstructionphases.Name'.$ext.',#__ssconstructionphases.Name) as ConstructionPhase,#__ssunits.PlotNumber,
-                    if(#__ssprojects.Name'.$ext.'<>"",#__ssprojects.Name'.$ext.',#__ssprojects.Name) as Name, "1" as paid, "1" as inst, #__ssunits.UnitValue 
-                    FROM #__sscustomers inner join #__sscontracts on #__sscustomers.ID = #__sscontracts.CustomerID
-                    LEFT join #__ssunits on #__ssunits.ID = #__sscontracts.UnitID
-                    LEFT join #__ssprojects on #__ssprojects.ID = #__ssunits.ProjectID
-                    LEFT join #__ssconstructionphases on #__ssconstructionphases.ID = #__ssunits.ConstructionPhaseID
+                    if(#__ssprojects.Name'.$ext.'<>"",#__ssprojects.Name'.$ext.',#__ssprojects.Name) as Name, 
+                    if(#__ssregions.Name'.$this->_ext.'<>"",#__ssregions.Name'.$this->_ext.',#__ssregions.Name) as region, 
+                    "1" as paid, 
+                    "1" as inst, 
+                    #__ssunits.UnitValue 
+                    FROM #__sscustomers inner join #__sscontracts on #__sscustomers.ID = #__sscontracts.CustomerID 
+                    LEFT join #__ssunits on #__ssunits.ID = #__sscontracts.UnitID 
+                    LEFT join #__ssprojects on #__ssprojects.ID = #__ssunits.ProjectID 
+                    LEFT join #__ssregions on #__ssregions.ID = #__ssprojects.RegionID 
+                    LEFT join #__ssconstructionphases on #__ssconstructionphases.ID = #__ssunits.ConstructionPhaseID 
                     WHERE #__sscontracts.CustomerID=' . $customerID;
         //die($query);
 		$db->setQuery( $query );
