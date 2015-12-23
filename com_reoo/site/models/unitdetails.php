@@ -41,7 +41,11 @@ class reooModelunitdetails extends JModelLegacy
         $resStatExt = ($this->_ext == "_trans")? "_en" : "_ara";
 		
 		
-        $query = 'SELECT #__ssunits.ID as uid, #__ssunits.*, #__ssprojects.ID as pid,#__ssprojects.*, if(#__ssprojects.Name'.$this->_ext.'<>"",#__ssprojects.Name'.$this->_ext.',#__ssprojects.Name) as Name,
+        $query = 'SELECT #__ssunits.ID as uid, 
+                  #__ssunits.*, 
+                  #__ssprojects.ID as pid,
+                  #__ssprojects.*, 
+                  if(#__ssprojects.Name'.$this->_ext.'<>"",#__ssprojects.Name'.$this->_ext.',#__ssprojects.Name) as Name,
                  if(#__ssregions.Name'.$this->_ext.'<>"",#__ssregions.Name'.$this->_ext.',#__ssregions.Name) as region,
                  if(#__sscities.Name'.$this->_ext.'<>"",#__sscities.Name'.$this->_ext.',#__sscities.Name) as city,
                  if(#__ssprovinces.Name'.$this->_ext.'<>"",#__ssprovinces.Name'.$this->_ext.',#__ssprovinces.Name) as province, '
@@ -74,10 +78,11 @@ class reooModelunitdetails extends JModelLegacy
 
     function getPimages($PID)
     {
-	$q = 'select Image from #__sspimages where ID = ' . $PID;
-	$this->_db->setQuery($q);
- 	$data = $this->_db->loadResultArray();
-	return $data;
+	    $q = 'select Image from #__sspimages where ID = ' . $PID;
+	    $this->_db->setQuery($q);
+     	//$data = $this->_db->loadResultArray(); Deprecated 
+     	$data = $this->_db->loadColumn();
+	    return $data;
     }
 
 }// class
