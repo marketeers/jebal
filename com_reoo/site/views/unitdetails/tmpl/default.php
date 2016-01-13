@@ -133,7 +133,7 @@ $host		= $uri->toString( array ('scheme', 'host', 'port' ) );
             if($user->id && isset($_GET['res'])): ?>
             <tr>
                 <td valign=top>
-                    <b><?php echo JText::_( 'project progress' ); ?></b>
+                    <b><?php echo JText::_( 'Project Progress' ); ?></b>
                 </td>
                 <td>
 
@@ -175,5 +175,13 @@ $host		= $uri->toString( array ('scheme', 'host', 'port' ) );
     <?php if(!isset($_GET['res'])) : ?>
     <input type="submit" value="<?php echo JText::_( 'Reserve' ); ?>" class="ssbutton" style="width:150px !important;">
     <?php endif; ?>
+    <!--
     <input type="button" value="<?php echo JText::_( 'BACK' ); ?>" class="ssbutton" style="width:150px !important;" onclick="javascript:history.go(-1);">
+    -->
 </form>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#rt-top-surround").hide();
+        $("#rt-footer-surround").hide();
+    });
+</script>

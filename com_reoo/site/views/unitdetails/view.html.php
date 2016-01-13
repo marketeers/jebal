@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @version $Id$
  * @package    unitsearch
@@ -10,7 +11,6 @@
 
 //-- No direct access
 defined('_JEXEC') or die('=;)');
-
 jimport( 'joomla.application.component.view');
 
 /**
@@ -36,12 +36,17 @@ class reooViewunitdetails extends JViewLegacy
         $this->assignRef('results', $unitsearch);
         
         $user =& JFactory::getUser();
+        
+        
         if($user->id)
         {
             $images = $model->getPimages($unitsearch[0]->pid);
             $this->assignRef('pimages', $images);
         }
-
-        parent::display($tpl);
+        
+        //parent::loadTemplate("new");
+        
+        //parent::display("new");
+        parent::display();
     }// function
 }// class

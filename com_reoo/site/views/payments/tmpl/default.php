@@ -89,4 +89,13 @@ defined('_JEXEC') or die('=;)');
 <div  style="margin-top:10px;">
     <?php echo JText::_( 'Payments And Installments Data Is Being Updated' ); ?>
 </div>
+<!--
+ <input type="button" value="<?php echo JText::_( 'BACK' ); ?>" class="ssbutton" style="width:150px !important;" onclick="javascript:history.go(-1);">
+ -->
 <div class="clr"></div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#rt-top-surround").hide();
+        $("#rt-footer-surround").hide();
+    });
+</script>
