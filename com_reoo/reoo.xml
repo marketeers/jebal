@@ -2,11 +2,11 @@
 <extension type="component" version="3.2.0" method="install">
 	<name>REOO!</name>
 	<!-- The following elements are optional and free of formatting constraints -->
-	<creationDate>November 2015</creationDate>
-	<author>Abdo Mohamed</author>
+	<creationDate>July 2017</creationDate>
+	<author>Abdelrahman Mohamed</author>
 	<authorEmail>amohamed@marketeers-eg.com</authorEmail>
 	<authorUrl>http://www.marketeers-eg.com</authorUrl>
-	<copyright>Copyright 2015</copyright>
+	<copyright>Copyright 2017</copyright>
 	<license>For Sky-Bridge Only</license>
 	<!--  The version string is recorded in the components table -->
 	<version>0.0.1</version>
